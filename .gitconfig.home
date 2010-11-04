@@ -1,0 +1,5 @@
+[user]
+	name = Wen-Hao Lue
+	email = me@wenhaolue.com
+[core]
+	excludesfile = ~/.gitignore
