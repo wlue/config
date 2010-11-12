@@ -3,3 +3,4 @@
 	email = me@wenhaolue.com
 [core]
 	excludesfile = ~/.gitignore
+	autocrlf = input
