@@ -1,11 +1,15 @@
 
-filetype off 
+filetype on
 call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
 
 set nocompatible
 syntax on
 filetype plugin on
+
+" for .dm and .dme files, load the dm syntax file
+au BufNewFile,BufRead *.dme set filetype=dm
+au BufNewFile,BufRead *.dm set filetype=dm
 
 colorscheme wombat
 set gfn=Inconsolata:h15
@@ -30,7 +34,6 @@ set backupdir=~/.vimtmp
 
 " Better window splitting start locations
 set splitright
-"set splitright
 set splitbelow
 
 "set wildmode
@@ -46,13 +49,13 @@ inoremap <silent><C-s> <Esc>:update<Cr>
 noremap [ {
 noremap ] }
 
-"+ and _ switch between split screens
+" + and _ switch between split screens
 nmap + <C-w>w
 nmap _ <C-w>W
 
-"{ and } switch between split screens
-nmap { :tabn<CR>
-nmap } :tabp<CR>
+" { and } switch between split screens
+nmap { :tabp<CR>
+nmap } :tabn<CR>
 
 let mapleader=","
 
