@@ -45,6 +45,9 @@ nnoremap <silent> <ESC> :noh<cr><ESC>
 nnoremap <silent><C-s> :update<Cr>
 inoremap <silent><C-s> <Esc>:update<Cr>
 
+"Map Semicolon to : for faster command execution
+nmap ; :
+
 " Make [ behave like { (move through paragraphs).  Same with ] and }
 noremap [ {
 noremap ] }
