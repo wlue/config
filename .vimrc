@@ -36,7 +36,7 @@ set backupdir=~/.vimtmp
 set splitright
 set splitbelow
 
-"set wildmode
+" set wildmode
 
 set hlsearch
 nnoremap <silent> <ESC> :noh<cr><ESC>
@@ -45,7 +45,7 @@ nnoremap <silent> <ESC> :noh<cr><ESC>
 nnoremap <silent><C-s> :update<Cr>
 inoremap <silent><C-s> <Esc>:update<Cr>
 
-"Map Semicolon to : for faster command execution
+" Map Semicolon to : for faster command execution
 nmap ; :
 
 " Make [ behave like { (move through paragraphs).  Same with ] and }
@@ -68,8 +68,17 @@ let mapleader=","
 map <Leader>v :sp ~/.vimrc<CR><C-W>_
 map <silent> <Leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
+" Shortcuts for changing viewport dimensions
+map <Leader>q <C-w>6<
+map <Leader>w <C-w>6>
+
 " Toggle NERDTree
 nmap <Leader>n :NERDTreeToggle<CR>
+
+" Toggle taglist
+nmap <Leader>t :TlistToggle<CR>
+let Tlist_Use_Right_Window=1
+let Tlist_WinWidth=40
 
 " Make
 nmap <Leader>m :make<CR>
