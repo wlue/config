@@ -41,7 +41,7 @@ fi
 #source /etc/profile
 
 # cs241 stuff
-export "CLASSPATH=.:/Users/wlue/prgm/classes:$CLASSPATH"
+# export "CLASSPATH=.:/Users/wlue/prgm/uw/classes:$CLASSPATH"
 
 export GEM_HOME='/usr/local/Cellar/gems/1.8'
 

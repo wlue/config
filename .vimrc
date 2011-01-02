@@ -74,6 +74,8 @@ map <Leader>w <C-w>6>
 
 " Toggle NERDTree
 nmap <Leader>n :NERDTreeToggle<CR>
+au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
+                     \ exe "normal g'\"" | endif  
 
 " Toggle taglist
 nmap <Leader>t :TlistToggle<CR>
