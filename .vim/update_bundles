@@ -13,6 +13,7 @@ git_bundles = [
   "git://github.com/mexpolk/vim-taglist.git",
   "git://github.com/vim-ruby/vim-ruby.git",
   "git://github.com/vim-scripts/FuzzyFinder.git",
+  "git://github.com/slack/vim-l9.git"
 ]
 
 vim_org_scripts = [
