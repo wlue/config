@@ -1,25 +1,29 @@
 #!/usr/bin/env ruby
 
 git_bundles = [ 
-  "git://github.com/msanders/snipmate.vim.git",
   "git://github.com/scrooloose/nerdtree.git",
   "git://github.com/tpope/vim-git.git",
   "git://github.com/tpope/vim-markdown.git",
   "git://github.com/tpope/vim-repeat.git",
-  "git://github.com/tpope/vim-surround.git",
+#  "git://github.com/tpope/vim-surround.git",
   "git://github.com/tsaleh/vim-align.git",
   "git://github.com/tsaleh/vim-supertab.git",
   "git://github.com/tsaleh/vim-tcomment.git",
   "git://github.com/mexpolk/vim-taglist.git",
   "git://github.com/vim-ruby/vim-ruby.git",
   "git://github.com/vim-scripts/FuzzyFinder.git",
-  "git://github.com/slack/vim-l9.git"
+  "git://github.com/slack/vim-l9.git",
+  "git://github.com/msanders/cocoa.vim.git",
+#  "git://github.com/msanders/snipmate.vim.git",
+  "git://github.com/vim-scripts/AutoComplPop.git",
+  "git://github.com/vim-scripts/OmniCppComplete.git",
 ]
 
 vim_org_scripts = [
   ["IndexedSearch", "7062",  "plugin"],
   ["gist",          "12732", "plugin"],
   ["jquery",        "12107", "syntax"],
+#  ["acp", 			"1879",  "plugin"],
 ]
 
 require 'fileutils'
