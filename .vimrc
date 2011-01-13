@@ -115,10 +115,10 @@ nmap <Leader>m :make<CR>
 nmap <Leader>M :!rake<CR>
 
 " OmniCompletion
-set completeopt=menuone,preview
-set ofu=syntaxcomplete#Complete
+set completeopt=longest,menuone,preview
+"set omnifunc=syntaxcomplete#Complete
 
-inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
 
 " Plugin Related Mappings:
