@@ -1,4 +1,7 @@
 
+" Use instead of "vimfiles" on Windows
+set runtimepath^=~/.vim  
+
 set nocompatible
 
 filetype on
@@ -12,7 +15,7 @@ colorscheme wombat
 
 if has('gui_running')
 
-	set gfn=Inconsolata:h15
+	set gfn=Inconsolata:h15,Consolas:h11
 
 	" get rid of the toolbar
 	set guioptions-=T
@@ -50,10 +53,10 @@ set smartcase
 " Keep cursor 5 lines in the screen 
 set scrolloff=5
 
-set vb
+" No visual bell
+set vb t_vb=
 set noswapfile
-"set nobackup
-"set backupdir=~/.vimtmp
+set nobackup
 
 " Better window splitting start locations
 set splitright
@@ -222,7 +225,7 @@ function! ConfigJavaScript()
 	map <buffer> ,c :w<CR>:!clear;jsl -process "%"
 endfunction
 
-au FileType javascript call ConigJavaScript()
+au FileType javascript call ConfigJavaScript()
 
 " Objective-C files
 let g:objc_man_key="M"
