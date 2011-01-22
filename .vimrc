@@ -116,7 +116,7 @@ nmap <Leader>M :!rake<CR>
 
 " OmniCompletion
 set completeopt=longest,menuone,preview
-"set omnifunc=syntaxcomplete#Complete
+set omnifunc=syntaxcomplete#Complete
 
 " inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
@@ -158,7 +158,7 @@ let tlist_javascript_settings = 'javascript;f:function;m:method;c:constructor;v:
 " and allow the ability to toggle between that sequence and simply
 " using the <tab> key:
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
-let SuperTabMappingForward = '<S-Space>'
+" let SuperTabMappingForward = '<M-Space>'
 
 
 " snipMate
