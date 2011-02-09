@@ -19,15 +19,22 @@ if [[ -n "$PS1" ]]; then
 	# update the values of LINES and COLUMNS.
 	shopt -s checkwinsize
 
-
 	# set a fancy prompt (non-color, unless we know we "want" color)
 	case "$TERM" in
 		xterm-color) color_prompt=yes;;
 	esac
 
+
+	export PATH=/usr/local/bin:/usr/local/sbin:$PATH:~/prgm/web/sites/libs/lithium/libraries/lithium/console
+	export GEM_HOME='/usr/local/Cellar/gems/1.8'
+
 	export PS1="  \[\e[32;1m\]\u\[\e[0m\]\[\e[32m\]@\h\[\e[36m\]\w \[\e[33m\]\$ \[\e[0m\]"
-	export CLICOLOR=1
-	export LSCOLORS=gxfxcxdxbxegedabagacad
+	# export CLICOLOR=1
+	# export LSCOLORS=gxfxcxdxbxegedabagacad
+
+	export LS_OPTIONS='--color=auto'
+	alias ls='gls $LS_OPTIONS -hF'
+	eval `gdircolors ~/.dir_colors`
 
 	# Alias definitions.
 	# You may want to put all your additions into a separate file like
@@ -43,9 +50,6 @@ if [[ -n "$PS1" ]]; then
 
 	# cs241 stuff
 	# export "CLASSPATH=.:/Users/wlue/prgm/uw/classes:$CLASSPATH"
-
-	export PATH=/usr/local/bin:/usr/local/sbin:$PATH
-	export GEM_HOME='/usr/local/Cellar/gems/1.8'
 fi
 
 # RVM configuration

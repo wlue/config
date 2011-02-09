@@ -98,6 +98,8 @@ nmap _ <C-w>W
 nmap { :tabp<CR>
 nmap } :tabn<CR>
 
+nmap <C-p> <C-^>
+
 " ,v brings up my .vimrc
 " ,V reloads it -- making all changes active (have to save first)
 
@@ -120,6 +122,7 @@ nmap <Leader>M :!rake<CR>
 " OmniCompletion
 set completeopt=longest,menuone,preview
 set omnifunc=syntaxcomplete#Complete
+set omnifunc=phpcomplete#CompletePHP
 
 " inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
@@ -227,6 +230,12 @@ endfunction
 
 au FileType javascript call ConfigJavaScript()
 
+" PHP files
+function! ConfigPHP()
+	map <buffer> ,c :w<CR>:!clear;php -l %<CR>
+endfunction
+
+au FileType php call ConfigPHP()
 " Objective-C files
 let g:objc_man_key="M"
 
