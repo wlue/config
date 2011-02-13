@@ -17,6 +17,7 @@ git_bundles = [
   "git://github.com/vim-scripts/OmniCppComplete.git",
   "git://github.com/paulyg/Vim-PHP-Stuff.git",	
   "git://github.com/henrik/vim-indexed-search.git",
+  "https://github.com/cakebaker/scss-syntax.vim.git",
 ]
 
 vim_org_scripts = [
