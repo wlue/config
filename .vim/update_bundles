@@ -2,6 +2,7 @@
 
 git_bundles = [ 
   "git://github.com/scrooloose/nerdtree.git",
+  "git://github.com/scrooloose/nerdcommenter.git",
   "git://github.com/tpope/vim-git.git",
   "git://github.com/tpope/vim-markdown.git",
   "git://github.com/tpope/vim-repeat.git",
@@ -15,12 +16,13 @@ git_bundles = [
   "git://github.com/vim-scripts/AutoComplPop.git",
   "git://github.com/vim-scripts/OmniCppComplete.git",
   "git://github.com/paulyg/Vim-PHP-Stuff.git",	
+  "git://github.com/henrik/vim-indexed-search.git",
 ]
 
 vim_org_scripts = [
-  ["IndexedSearch", "7062",  "plugin"],
-  ["gist",          "12732", "plugin"],
-  ["jquery",        "12107", "syntax"],
+  #["IndexedSearch", "7062",  "plugin"],
+  #["gist",          "12732", "plugin"],
+  #["jquery",        "12107", "syntax"],
 #  ["acp", 			"1879",  "plugin"],
 ]
 

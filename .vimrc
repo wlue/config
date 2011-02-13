@@ -99,6 +99,7 @@ nmap { :tabp<CR>
 nmap } :tabn<CR>
 
 nmap <C-p> <C-^>
+imap <C-p> <C-^>
 
 " ,v brings up my .vimrc
 " ,V reloads it -- making all changes active (have to save first)

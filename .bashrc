@@ -24,8 +24,10 @@ if [[ -n "$PS1" ]]; then
 		xterm-color) color_prompt=yes;;
 	esac
 
-
+	# Homebrew apps higher priority
 	export PATH=/usr/local/bin:/usr/local/sbin:$PATH:~/prgm/web/sites/libs/lithium/libraries/lithium/console
+
+	# Brew by Gems
 	export GEM_HOME='/usr/local/Cellar/gems/1.8'
 
 	export PS1="  \[\e[32;1m\]\u\[\e[0m\]\[\e[32m\]@\h\[\e[36m\]\w \[\e[33m\]\$ \[\e[0m\]"
