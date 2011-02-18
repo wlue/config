@@ -2,22 +2,23 @@
 
 git_bundles = [ 
   "git://github.com/scrooloose/nerdtree.git",
-  "git://github.com/scrooloose/nerdcommenter.git",
+  #"git://github.com/scrooloose/nerdcommenter.git",
   "git://github.com/tpope/vim-git.git",
   "git://github.com/tpope/vim-markdown.git",
   "git://github.com/tpope/vim-repeat.git",
   "git://github.com/tsaleh/vim-align.git",
   "git://github.com/tsaleh/vim-supertab.git",
+  "git://github.com/tsaleh/vim-tcomment.git",
   "git://github.com/mexpolk/vim-taglist.git",
   "git://github.com/vim-ruby/vim-ruby.git",
   "git://github.com/vim-scripts/FuzzyFinder.git",
   "git://github.com/slack/vim-l9.git",
   "git://github.com/msanders/cocoa.vim.git",
-  "git://github.com/vim-scripts/AutoComplPop.git",
+  #"git://github.com/vim-scripts/AutoComplPop.git",
   "git://github.com/vim-scripts/OmniCppComplete.git",
   "git://github.com/paulyg/Vim-PHP-Stuff.git",	
   "git://github.com/henrik/vim-indexed-search.git",
-  "https://github.com/cakebaker/scss-syntax.vim.git",
+  "git://github.com/cakebaker/scss-syntax.vim.git",
 ]
 
 vim_org_scripts = [

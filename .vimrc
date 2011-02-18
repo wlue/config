@@ -65,6 +65,9 @@ set splitbelow
 " Show auto-completion in command line
 set wildmenu
 
+" Automatically load file changes
+set autoread
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
