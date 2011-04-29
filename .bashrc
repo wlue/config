@@ -36,7 +36,7 @@ if [[ -n "$PS1" ]]; then
 
 	export LS_OPTIONS='--color=auto'
 	alias ls='gls $LS_OPTIONS -hF'
-	eval `gdircolors ~/.dir_colors`
+	# eval `gdircolors ~/.dir_colors`
 
 	# Alias definitions.
 	# You may want to put all your additions into a separate file like

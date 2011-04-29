@@ -180,6 +180,11 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 " snor <silent> <Leader>sr <esc>i<right><c-r>=TriggerSnippet()<cr>
 " ino <silent> <Leader>ss <c-r>=ShowAvailableSnips()<cr>
 
+" Gundo
+
+nmap ,g :GundoToggle<CR>
+let g:gundo_right = 1
+
 
 " Returns the current file without its extension
 function! CurrFileNoExt()

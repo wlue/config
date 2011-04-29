@@ -20,6 +20,7 @@ git_bundles = [
   "git://github.com/henrik/vim-indexed-search.git",
   "git://github.com/cakebaker/scss-syntax.vim.git",
   "git://github.com/altercation/vim-colors-solarized.git",
+  "git://github.com/sjl/gundo.vim.git",
 ]
 
 vim_org_scripts = [
