@@ -4,11 +4,13 @@ set runtimepath^=~/.vim
 
 set nocompatible
 
-filetype on
-filetype plugin on
+filetype off
 
 call pathogen#helptags()
 call pathogen#runtime_append_all_bundles()
+
+filetype on
+filetype plugin on
 
 syntax on
 colorscheme wombat
@@ -185,6 +187,9 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 nmap ,g :GundoToggle<CR>
 let g:gundo_right = 1
 
+" Easy Tags
+
+let g:easytags_cmd = '/usr/local/bin/ctags'
 
 " Returns the current file without its extension
 function! CurrFileNoExt()

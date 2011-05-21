@@ -47,6 +47,11 @@ if [[ -n "$PS1" ]]; then
 		. ~/.bash_aliases
 	fi
 
+	if [ -f `brew --prefix`/etc/bash_completion ]; then
+		. `brew --prefix`/etc/bash_completion
+	fi
+	
+
 	# source default system-wide profile
 	#source /etc/profile
 
