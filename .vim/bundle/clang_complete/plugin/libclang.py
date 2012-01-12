@@ -18,14 +18,7 @@ def getCurrentFile():
   file = "\n".join(vim.eval("getline(1, '$')"))
   return (vim.current.buffer.name, file)
 
-def getCurrentTranslationUnit(update = False):
-  userOptionsGlobal = vim.eval("g:clang_user_options").split(" ")
-  userOptionsLocal = vim.eval("b:clang_user_options").split(" ")
-  args = userOptionsGlobal + userOptionsLocal
-
-  currentFile = getCurrentFile()
-  fileName = vim.current.buffer.name
-
+def getCurrentTranslationUnit(args, currentFile, fileName, update = False):
   if fileName in translationUnits:
     tu = translationUnits[fileName]
     if update:
@@ -63,6 +56,25 @@ def getCurrentTranslationUnit(update = False):
     print "LibClang - First reparse (generate PCH cache): " + str(elapsed)
   return tu
 
+def splitOptions(options):
+  optsList = []
+  opt = ""
+  quoted = False
+
+  for char in options:
+    if char == ' ' and not quoted:
+      if opt != "":
+        optsList += [opt]
+        opt = ""
+      continue
+    elif char == '"':
+      quoted = not quoted
+    opt += char
+
+  if opt != "":
+    optsList += [opt]
+  return optsList
+
 def getQuickFix(diagnostic):
   # Some diagnostics have no file, e.g. "too many errors emitted, stopping now"
   if diagnostic.location.file:
@@ -70,9 +82,15 @@ def getQuickFix(diagnostic):
   else:
     filename = ""
 
-  if diagnostic.severity == diagnostic.Warning:
+  if diagnostic.severity == diagnostic.Ignored:
+    type = 'I'
+  elif diagnostic.severity == diagnostic.Note:
+    type = 'I'
+  elif diagnostic.severity == diagnostic.Warning:
     type = 'W'
   elif diagnostic.severity == diagnostic.Error:
+    type = 'E'
+  elif diagnostic.severity == diagnostic.Fatal:
     type = 'E'
   else:
     return None
@@ -129,47 +147,50 @@ def getCurrentQuickFixList():
 def updateCurrentDiagnostics():
   global debug
   debug = int(vim.eval("g:clang_debug")) == 1
-  getCurrentTranslationUnit(update = True)
+  userOptionsGlobal = splitOptions(vim.eval("g:clang_user_options"))
+  userOptionsLocal = splitOptions(vim.eval("b:clang_user_options"))
+  args = userOptionsGlobal + userOptionsLocal
+  getCurrentTranslationUnit(args, getCurrentFile(),
+                          vim.current.buffer.name, update = True)
 
-def getCurrentCompletionResults(line, column):
-  tu = getCurrentTranslationUnit()
-  currentFile = getCurrentFile()
+def getCurrentCompletionResults(line, column, args, currentFile, fileName):
+  tu = getCurrentTranslationUnit(args, currentFile, fileName)
   if debug:
     start = time.time()
-  cr = tu.codeComplete(vim.current.buffer.name, line, column, [currentFile],
+  cr = tu.codeComplete(fileName, line, column, [currentFile],
       complete_flags)
   if debug:
     elapsed = (time.time() - start)
     print "LibClang - Code completion time: " + str(elapsed)
   return cr
 
-def completeCurrentAt(line, column):
-  print "\n".join(map(str, getCurrentCompletionResults().results))
-
-def formatChunkForWord(chunk):
-  return chunk.spelling
-
 def formatResult(result):
   completion = dict()
 
   abbr = getAbbr(result.string)
-  info = filter(lambda x: not x.isKindInformative(), result.string)
-  word = filter(lambda x: not x.isKindResultType(), info)
-  returnValue = filter(lambda x: x.isKindResultType(), info)
+  word = filter(lambda x: not x.isKindInformative() and not x.isKindResultType(), result.string)
+  returnValue = filter(lambda x: x.isKindResultType(), result.string)
 
+  args_pos = []
+  cur_pos = 0
+  for chunk in word:
+    chunk_len = len(chunk.spelling)
+    if chunk.isKindPlaceHolder():
+      args_pos += [[ cur_pos, cur_pos + chunk_len ]]
+    cur_pos += chunk_len
+
+  word = "".join(map(lambda x: x.spelling, word))
+
+  menu = word
   if len(returnValue) > 0:
-    returnStr = returnValue[0].spelling + " "
-  else:
-    returnStr = ""
-
-  info = returnStr + "".join(map(lambda x: x.spelling, word))
-  word = abbr
+    menu = returnValue[0].spelling + " " + menu
 
   completion['word'] = word
   completion['abbr'] = abbr
-  completion['menu'] = info
-  completion['info'] = info
-  completion['dup'] = 1
+  completion['menu'] = menu
+  completion['info'] = word
+  completion['args_pos'] = args_pos
+  completion['dup'] = 0
 
   # Replace the number that represents a specific kind with a better
   # textual representation.
@@ -181,18 +202,41 @@ def formatResult(result):
 class CompleteThread(threading.Thread):
   lock = threading.Lock()
 
-  def __init__(self, line, column):
+  def __init__(self, line, column, currentFile, fileName):
     threading.Thread.__init__(self)
     self.line = line
     self.column = column
+    self.currentFile = currentFile
+    self.fileName = fileName
     self.result = None
+    userOptionsGlobal = splitOptions(vim.eval("g:clang_user_options"))
+    userOptionsLocal = splitOptions(vim.eval("b:clang_user_options"))
+    self.args = userOptionsGlobal + userOptionsLocal
 
   def run(self):
-    with CompleteThread.lock:
-      try:
-        self.result = getCurrentCompletionResults(self.line, self.column)
-      except Exception:
-        pass
+    try:
+      CompleteThread.lock.acquire()
+      if self.line == -1:
+        # Warm up the caches. For this it is sufficient to get the current
+        # translation unit. No need to retrieve completion results.
+        # This short pause is necessary to allow vim to initialize itself.
+        # Otherwise we would get: E293: block was not locked
+        # The user does not see any delay, as we just pause a background thread.
+        time.sleep(0.1)
+        getCurrentTranslationUnit(self.args, self.currentFile, self.fileName)
+      else:
+        self.result = getCurrentCompletionResults(self.line, self.column,
+                                          self.args, self.currentFile, self.fileName)
+    except Exception:
+      pass
+    CompleteThread.lock.release()
+
+def WarmupCache():
+  global debug
+  debug = int(vim.eval("g:clang_debug")) == 1
+  t = CompleteThread(-1, -1, getCurrentFile(), vim.current.buffer.name)
+  t.start()
+  return
 
 
 def getCurrentCompletions(base):
@@ -202,9 +246,9 @@ def getCurrentCompletions(base):
   line = int(vim.eval("line('.')"))
   column = int(vim.eval("b:col"))
 
-  t = CompleteThread(line, column)
+  t = CompleteThread(line, column, getCurrentFile(), vim.current.buffer.name)
   t.start()
-  while t.is_alive():
+  while t.isAlive():
     t.join(0.01)
     cancel = int(vim.eval('complete_check()'))
     if cancel != 0:
@@ -334,7 +378,7 @@ kinds = dict({                                                                 \
                                                                                \
 # Preprocessing                                                                \
 500 : '500', # CXCursor_PreprocessingDirective                                 \
-501 : 'm',   # CXCursor_MacroDefinition                                        \
+501 : 'd',   # CXCursor_MacroDefinition                                        \
 502 : '502', # CXCursor_MacroInstantiation                                     \
 503 : '503'  # CXCursor_InclusionDirective                                     \
 })

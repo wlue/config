@@ -2,5 +2,5 @@
 	name = Wen-Hao Lue
 	email = me@wenhaolue.com
 [core]
-	excludesfile = ~/.gitignore
+	excludesfile = /Users/wlue/.gitignore
 	autocrlf = input

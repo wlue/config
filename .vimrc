@@ -142,6 +142,9 @@ nmap <Leader>fb :FufBuffer<CR>
 nmap <Leader>ft :FufTag<CR>
 
 " Toggle NERDTree
+"
+let NERDTreeIgnore=['\.o$', '\.d$', '\~$']
+
 nmap <Leader>n :NERDTreeToggle<CR>
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
 					 \ exe "normal g'\"" | endif
@@ -152,13 +155,16 @@ inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
   \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 
-" Toggle taglist
-nmap <Leader>t :TlistToggle<CR>
-let Tlist_Use_Right_Window=1
-let Tlist_WinWidth=40
-let Tlist_Inc_Winwidth=0
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_Show_One_File=1
+" " Toggle taglist
+" nmap <Leader>t :TlistToggle<CR>
+" let Tlist_Use_Right_Window=1
+" let Tlist_WinWidth=40
+" let Tlist_Inc_Winwidth=0
+" let Tlist_Exit_OnlyWindow = 1
+" let Tlist_Show_One_File=1
+
+" Toggle Tagbar
+nmap <Leader>t :TagbarToggle<CR>
 
 " Show functions, methods, classes, and global variables in JavaScript
 let tlist_javascript_settings = 'javascript;f:function;m:method;c:constructor;v:variable'
@@ -190,6 +196,7 @@ let g:gundo_right = 1
 " Easy Tags
 
 let g:easytags_cmd = '/usr/local/bin/ctags'
+let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 
 " Returns the current file without its extension
 function! CurrFileNoExt()

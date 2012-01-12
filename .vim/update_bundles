@@ -24,6 +24,8 @@ git_bundles = [
   "git://github.com/sjl/gundo.vim.git",
   "git://github.com/Rip-Rip/clang_complete",
   "git://github.com/xolox/vim-easytags",
+  "git://github.com/majutsushi/tagbar.git",
+  "git://github.com/Lokaltog/vim-powerline.git",
 ]
 
 vim_org_scripts = [

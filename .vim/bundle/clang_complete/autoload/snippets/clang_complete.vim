@@ -2,26 +2,25 @@
 " Author: Xavier Deguillard, Philippe Vaucher
 
 function! snippets#clang_complete#init()
-  noremap <expr> <buffer> <tab> UpdateSnips()
-  snoremap <expr> <buffer> <tab> UpdateSnips()
+  noremap <expr> <silent> <buffer> <tab> UpdateSnips()
+  snoremap <expr> <silent> <buffer> <tab> UpdateSnips()
   syntax match Conceal /<#/ conceal
   syntax match Conceal /#>/ conceal
 endfunction
 
-" We want to generate a format like [#std::basic_string<char> &#]append(<#const std::basic_string<char> &__str#>, <#size_type __pos#>, <#size_type __n#>)
-function! snippets#clang_complete#add_snippet(keyword, proto)
-  let l:snippet_id = substitute(a:proto, '\v(^.{-})\V' . a:keyword, a:keyword , '')
-  let l:snippet_id = substitute(l:snippet_id, '<', '<<#', 'g')
-  let l:snippet_id = substitute(l:snippet_id, '>', '#>>', 'g')
-  let l:snippet_id = substitute(l:snippet_id, ',', '#>, <#', 'g')
+" fullname = strcat(char *dest, const char *src)
+" args_pos = [ [8, 17], [20, 34] ]
+function! snippets#clang_complete#add_snippet(fullname, args_pos)
+  let l:res = ''
+  let l:prev_idx = 0
+  for elt in a:args_pos
+    let l:res .= a:fullname[l:prev_idx : elt[0] - 1] . '<#' . a:fullname[elt[0] : elt[1] - 1] . '#>'
+    let l:prev_idx = elt[1]
+  endfor
 
-  " A function with no arguments shouldn't have snippets for the argument list.
-  if match(l:snippet_id, '()') != -1
-    return l:snippet_id
-  endif
-  let l:snippet_id = substitute(l:snippet_id, '(', '(<#', 'g')
-  let l:snippet_id = substitute(l:snippet_id, ')', '#>)', 'g')
-  return l:snippet_id
+  let l:res .= a:fullname[l:prev_idx : ]
+
+  return l:res
 endfunction
 
 function! snippets#clang_complete#trigger()
@@ -40,12 +39,44 @@ function! UpdateSnips()
   if match(l:line, l:pattern) == -1
     return "\<c-i>"
   endif
-  let l:linenb = line('.')
-  if &selection == "exclusive"
-    return "\<esc>/\\%" . l:linenb . "l<#\<CR>v/#>\<CR>ll\<C-G>"
-  else
-    return "\<esc>/\\%" . l:linenb . "l<#\<CR>v/#>\<CR>l\<C-G>"
+
+  let l:commands = ""
+  if mode() != 'n'
+      let l:commands .= "\<esc>"
   endif
+
+  let l:commands .= ":call MoveToCCSnippetBegin()\<CR>"
+  let l:commands .= "m'"
+  let l:commands .= ":call MoveToCCSnippetEnd()\<CR>"
+
+  if &selection == "exclusive"
+    let l:commands .= "ll"
+  else
+    let l:commands .= "l"
+  endif
+
+  let l:commands .= "v`'o\<C-G>"
+
+  return l:commands
+endfunction
+
+function! MoveToCCSnippetBegin()
+  let l:pattern = '<#'
+  let l:line = getline('.')
+  let l:startpos = col('.') + 1
+  let l:ind = match(l:line, l:pattern, l:startpos)
+  if l:ind == -1
+    let l:ind = match(l:line, l:pattern, 0)
+  endif
+  call cursor(line('.'), l:ind + 1)
+endfunction
+
+function! MoveToCCSnippetEnd()
+  let l:line = getline('.')
+  let l:pattern = '#>'
+  let l:startpos = col('.') + 2
+
+  call cursor(line('.'), match(l:line, l:pattern, l:startpos) + 1)
 endfunction
 
 function! s:BeginSnips()
@@ -61,3 +92,5 @@ function! s:BeginSnips()
   endif
   call feedkeys("\<esc>^\<tab>")
 endfunction
+
+" vim: set ts=2 sts=2 sw=2 expandtab :
