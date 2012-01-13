@@ -38,7 +38,7 @@ set backspace=2
 " By default, use real tabs
 set tabstop=4
 set shiftwidth=4
-set ch=2
+set ch=3
 
 set hidden
 set autoindent
@@ -154,15 +154,6 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
   \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
-
-" " Toggle taglist
-" nmap <Leader>t :TlistToggle<CR>
-" let Tlist_Use_Right_Window=1
-" let Tlist_WinWidth=40
-" let Tlist_Inc_Winwidth=0
-" let Tlist_Exit_OnlyWindow = 1
-" let Tlist_Show_One_File=1
-
 " Toggle Tagbar
 nmap <Leader>t :TagbarToggle<CR>
 
@@ -177,7 +168,6 @@ let tlist_javascript_settings = 'javascript;f:function;m:method;c:constructor;v:
 " using the <tab> key:
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 " let SuperTabMappingForward = '<M-Space>'
-
 
 " snipMate
 
