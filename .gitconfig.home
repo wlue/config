@@ -3,4 +3,7 @@
 	email = me@wenhaolue.com
 [core]
 	excludesfile = /Users/wlue/.gitignore
-	autocrlf = input
+	autocrlf = false
+	editor = /usr/bin/vim
+[color]
+	ui = true

@@ -120,7 +120,8 @@ map <Leader>q <C-w>6<
 map <Leader>w <C-w>6>
 
 " Make
-nmap <Leader>m :make<CR>
+nmap <Leader>m :!make<CR>
+nmap <Leader>r :!make run<CR>
 
 " Rake 
 nmap <Leader>M :!rake<CR>
@@ -143,7 +144,7 @@ nmap <Leader>ft :FufTag<CR>
 
 " Toggle NERDTree
 "
-let NERDTreeIgnore=['\.o$', '\.d$', '\~$']
+let NERDTreeIgnore=['\.o$', '\.d$', '\~$', '\.class$']
 
 nmap <Leader>n :NERDTreeToggle<CR>
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -168,15 +169,6 @@ let tlist_javascript_settings = 'javascript;f:function;m:method;c:constructor;v:
 " using the <tab> key:
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 " let SuperTabMappingForward = '<M-Space>'
-
-" snipMate
-
-" do our own mappings
-" let s:did_snips_mappings = 0
- 
-" ino <silent> <Leader>sr <c-r>=TriggerSnippet()<cr>
-" snor <silent> <Leader>sr <esc>i<right><c-r>=TriggerSnippet()<cr>
-" ino <silent> <Leader>ss <c-r>=ShowAvailableSnips()<cr>
 
 " Gundo
 

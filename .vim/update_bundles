@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
-
 git_bundles = [ 
   "git://github.com/scrooloose/nerdtree.git",
   #"git://github.com/scrooloose/nerdcommenter.git",
@@ -8,24 +7,22 @@ git_bundles = [
   "git://github.com/tpope/vim-repeat.git",
   # "git://github.com/tsaleh/vim-align.git",
   # "git://github.com/tsaleh/vim-supertab.git",
-  "git://github.com/tsaleh/vim-tcomment.git",
+  "git://github.com/vim-scripts/tComment.git",
   "git://github.com/tpope/vim-fugitive",
-  "git://github.com/mexpolk/vim-taglist.git",
-  "git://github.com/vim-ruby/vim-ruby.git",
-  "git://github.com/vim-scripts/FuzzyFinder.git",
+  # "git://github.com/vim-ruby/vim-ruby.git",
   "git://github.com/slack/vim-l9.git",
   "git://github.com/msanders/cocoa.vim.git",
   #"git://github.com/vim-scripts/AutoComplPop.git",
   # "git://github.com/vim-scripts/OmniCppComplete.git",
-  "git://github.com/paulyg/Vim-PHP-Stuff.git",	
-  "git://github.com/henrik/vim-indexed-search.git",
+  #"git://github.com/paulyg/Vim-PHP-Stuff.git",	
+  #"git://github.com/henrik/vim-indexed-search.git",
   "git://github.com/cakebaker/scss-syntax.vim.git",
-  "git://github.com/altercation/vim-colors-solarized.git",
+  #"git://github.com/altercation/vim-colors-solarized.git",
   "git://github.com/sjl/gundo.vim.git",
   "git://github.com/Rip-Rip/clang_complete",
-  "git://github.com/xolox/vim-easytags",
   "git://github.com/majutsushi/tagbar.git",
   "git://github.com/Lokaltog/vim-powerline.git",
+  "git://github.com/juvenn/mustache.vim.git",
 ]
 
 vim_org_scripts = [
