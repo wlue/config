@@ -1,0 +1,8 @@
+
+" Map Semicolon to : for faster command execution
+nmap ; :
+
+" Make J/K behave like { (move through paragraphs).  Same with ] and }
+noremap J }
+noremap K {
+
