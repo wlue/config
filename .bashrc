@@ -36,6 +36,8 @@ if [[ -n "$PS1" ]]; then
 
 	export LS_OPTIONS='--color=auto'
 	alias ls='gls $LS_OPTIONS -hF'
+	alias xo='open *.xcodeproj'
+
 	# eval `gdircolors ~/.dir_colors`
 
 	# Alias definitions.
