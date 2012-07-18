@@ -37,3 +37,5 @@ git-pull-request () {
 	open 'http://'$(git remote -v | awk -F'([@ :])|(\\.git)' '/fetch/ {print $2"/"$3}')'/pull/new/'$(git branch --no-color  | awk '/^\* / {print $2}')
 }
 
+alias xo="open *.xcodeproj"
+
