@@ -6,3 +6,8 @@ nmap ; :
 noremap J }
 noremap K {
 
+noremap ,c <D-/>
+
+" Make
+nmap ,m :make<CR>
+nmap ,r :run<CR>
