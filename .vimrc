@@ -35,9 +35,12 @@ endif
 
 set backspace=2
 
-" By default, use real tabs
+" By default, use spaces for tabs
 set tabstop=4
 set shiftwidth=4
+set expandtab
+set softtabstop=4
+
 set ch=3
 
 set hidden
@@ -239,6 +242,7 @@ function! ConfigPHP()
 endfunction
 
 au FileType php call ConfigPHP()
+
 " Objective-C files
 let g:objc_man_key="M"
 
