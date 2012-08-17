@@ -38,8 +38,8 @@ set backspace=2
 " By default, use spaces for tabs
 set tabstop=4
 set shiftwidth=4
-set expandtab
 set softtabstop=4
+set expandtab
 
 set ch=3
 
@@ -225,13 +225,19 @@ au FileType dme call ConfigDME()
 " HTML files
 function! ConfigHTML()
 	map <buffer> ,r :w<CR>:!open %<CR>
+	set tabstop=2
+	set shiftwidth=2
+	set softtabstop=2
 endfunction
 
 au FileType html call ConfigHTML()
 
 " JavaScript files
 function! ConfigJavaScript()
-	map <buffer> ,c :w<CR>:!clear;jsl -process "%"
+	map <buffer> ,c :w<CR>:!clear;jsl -process "%"<CR>
+	set tabstop=2
+	set shiftwidth=2
+	set softtabstop=2
 endfunction
 
 au FileType javascript call ConfigJavaScript()

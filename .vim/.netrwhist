@@ -1,6 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='/Users/wlue/.ssh'
 let g:netrw_dirhist_2='/Users/wlue/prgm/byond/tactical'
 let g:netrw_dirhist_3='/Users/wlue/prgm/uw/straights'
 let g:netrw_dirhist_4='/Users/wlue/.wlue.config/.vim'
+let g:netrw_dirhist_5='/Users/wenhao/Development/PonyExpress/PonyExpress.xcodeproj'
