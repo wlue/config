@@ -26,6 +26,7 @@ git_bundles = [
   "git://github.com/groenewege/vim-less.git",
   "git://github.com/jnwhiteh/vim-golang",
   "git://github.com/nono/vim-handlebars",
+  "git://github.com/tpope/vim-markdown.git",
 ]
 
 vim_org_scripts = [
