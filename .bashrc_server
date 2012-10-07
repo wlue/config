@@ -25,12 +25,12 @@ if [[ -n "$PS1" ]]; then
 	esac
 
 	export PS1="  \[\e[32;1m\]\u\[\e[0m\]\[\e[32m\]@\h\[\e[36m\]\w \[\e[33m\]\$ \[\e[0m\]"
-	# export CLICOLOR=1
-	# export LSCOLORS=gxfxcxdxbxegedabagacad
+	export CLICOLOR=1
+	export LSCOLORS=gxfxcxdxbxegedabagacad
 
 	export LS_OPTIONS='--color=auto'
 	alias ls='ls $LS_OPTIONS -hF'
-	eval `gdircolors ~/.dir_colors`
+	# eval `gdircolors ~/.dir_colors`
 
 	# Alias definitions.
 	# You may want to put all your additions into a separate file like
