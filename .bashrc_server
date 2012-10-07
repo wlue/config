@@ -24,14 +24,13 @@ if [[ -n "$PS1" ]]; then
 		xterm-color) color_prompt=yes;;
 	esac
 
-
 	export PS1="  \[\e[32;1m\]\u\[\e[0m\]\[\e[32m\]@\h\[\e[36m\]\w \[\e[33m\]\$ \[\e[0m\]"
 	# export CLICOLOR=1
 	# export LSCOLORS=gxfxcxdxbxegedabagacad
 
 	export LS_OPTIONS='--color=auto'
-
-	# eval `gdircolors ~/.dir_colors`
+	alias ls='ls $LS_OPTIONS -hF'
+	eval `gdircolors ~/.dir_colors`
 
 	# Alias definitions.
 	# You may want to put all your additions into a separate file like
@@ -44,8 +43,5 @@ if [[ -n "$PS1" ]]; then
 
 	# source default system-wide profile
 	#source /etc/profile
-
-	# cs241 stuff
-	# export "CLASSPATH=.:/Users/wlue/prgm/uw/classes:$CLASSPATH"
 fi
 
