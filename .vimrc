@@ -34,7 +34,7 @@ if has('gui_running')
 endif
 
 set backspace=2
-
+  
 " By default, use spaces for tabs
 set tabstop=4
 set shiftwidth=4
@@ -147,7 +147,7 @@ nmap <Leader>ft :FufTag<CR>
 
 " Toggle NERDTree
 "
-let NERDTreeIgnore=['\.o$', '\.d$', '\~$', '\.class$']
+let NERDTreeIgnore=['\.o$', '\.d$', '\~$', '\.class$', '\.pyc']
 
 nmap <Leader>n :NERDTreeToggle<CR>
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -230,7 +230,24 @@ function! ConfigHTML()
 	set softtabstop=2
 endfunction
 
+au BufRead,BufNewFile *.scss setfiletype scss
+
 au FileType html call ConfigHTML()
+au FileType css call ConfigHTML()
+au FileType scss call ConfigHTML()
+
+" TEX files
+
+au FileType tex call ConfigTEX()
+
+function! ConfigTEX()
+    set textwidth=80
+
+    " Mark the 81st column
+    if exists('+colorcolumn')
+        set colorcolumn=+1
+    endif
+endfunction
 
 " JavaScript files
 function! ConfigJavaScript()
