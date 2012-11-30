@@ -51,6 +51,9 @@ set history=1000
 
 set shortmess=atI
 
+" Show trailing spaces
+set list listchars=tab:\ \ ,trail:·
+
 " Only case sensitive if a capital letter exists in a search query
 set ignorecase
 set smartcase

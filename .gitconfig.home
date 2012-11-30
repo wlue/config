@@ -7,3 +7,5 @@
 	editor = /usr/bin/vim
 [color]
 	ui = true
+[diff]
+	tool = vimdiff
