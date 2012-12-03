@@ -13,11 +13,11 @@ filetype on
 filetype plugin on
 
 syntax on
-colorscheme wombat
+colorscheme wombat256mod
 
 if has('gui_running')
 
-	set gfn=Inconsolata:h15,Consolas:h11
+	set gfn=Inconsolata-dzPowerline:h15,Inconsolata:h15,Consolas:h11
 
 	" get rid of the toolbar
 	set guioptions-=T
@@ -28,20 +28,20 @@ if has('gui_running')
 	set guioptions-=r
 	set guioptions-=R
 	
-	set number
 	set mouse=a
 
 endif
 
+set number
 set backspace=2
-  
+
 " By default, use spaces for tabs
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
 
-set ch=3
+set ch=2
 
 set hidden
 set autoindent
@@ -129,7 +129,7 @@ map <Leader>w <C-w>6>
 nmap <Leader>m :!make<CR>
 nmap <Leader>r :!make run<CR>
 
-" Rake 
+" Rake
 nmap <Leader>M :!rake<CR>
 
 " OmniCompletion
@@ -141,6 +141,11 @@ set omnifunc=phpcomplete#CompletePHP
 
 
 " Plugin Related Mappings:
+
+" Powerline
+set t_Co=256
+set laststatus=2
+let g:Powerline_symbols = 'fancy'
 
 " FuzzyFinder
 nmap <Leader>ff :FufFile<CR>
