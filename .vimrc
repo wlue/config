@@ -1,7 +1,6 @@
 set nocompatible
 syntax on
 
-set t_Co=256
 set background=dark
 colorscheme wombat256mod
 
@@ -34,19 +33,20 @@ Bundle 'wavded/vim-stylus'
 Bundle 'scrooloose/syntastic'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'tomtom/tcomment_vim'
+Bundle 'SyntaxComplete'
 
 filetype plugin indent on
 
 if has('gui_running')
-    set gfn=Inconsolata-dz\ for\ Powerline:h13,Inconsolata:h15,Consolas:h11
-    " let g:Powerline_symbols = 'fancy'
+  set gfn=Inconsolata-dz\ for\ Powerline:h13
+  let g:Powerline_symbols = 'compatible'
 
-    " get rid of the toolbar/scrollbars
-    set guioptions-=T
-    set guioptions-=l
-    set guioptions-=L
-    set guioptions-=r
-    set guioptions-=R
+  " get rid of the toolbar/scrollbars
+  set guioptions-=T
+  set guioptions-=l
+  set guioptions-=L
+  set guioptions-=r
+  set guioptions-=R
 endif
 
 set mouse=a
@@ -58,6 +58,7 @@ set hidden
 set autoindent
 set ruler
 set history=1000
+set autoread
 set ch=2
 
 " By default, use spaces for tabs
@@ -65,6 +66,14 @@ set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+
+" 80 character limit
+set textwidth=80
+
+" Mark the 81st column
+" if exists('+colorcolumn')
+"   set colorcolumn=+1
+" endif
 
 " Highlight VCS conflict markers
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
@@ -160,12 +169,19 @@ nmap <Leader>r make run<CR>
 nmap <Leader>M rake<CR>
 
 " OmniCompletion
-" set completeopt=longest,menuone,preview
-" set omnifunc=syntaxcomplete#Complete
-" set omnifunc=phpcomplete#CompletePHP
+set completeopt=longest,menuone,preview
 
+if has("autocmd") && exists("+omnifunc")
+  autocmd Filetype *
+        \ if &omnifunc == "" |
+        \   setlocal omnifunc=syntaxcomplete#Complete |
+        \ endif
+endif
 
 " Plugin Related Mappings:
+
+" Cocoa.vim
+let g:objc_man_key="M"
 
 " Powerline
 set laststatus=2
@@ -181,12 +197,12 @@ set wildignore+=*.o,.git,*.jpg,*.png,*.swp,*.d,*.gif,*.pyc,node_modules,*.class,
 let NERDTreeIgnore=['\.o$', '\.d$', '\~$', '\.class$', '\.pyc']
 nmap <Leader>n :NERDTreeToggle<CR>
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
-					 \ exe "normal g'\"" | endif
+      \ exe "normal g'\"" | endif
 inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-  \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+      \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
-  \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+      \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 " Toggle Tagbar
 nmap <Leader>T :TagbarToggle<CR>
@@ -195,27 +211,28 @@ nmap <Leader>T :TagbarToggle<CR>
 let tlist_javascript_settings = 'javascript;f:function;m:method;c:constructor;v:variable'
 
 " SuperTab
-" let g:SuperTabDefaultCompletionType = '<c-n>'
 
 " SuperTab -- set default tab completion key to be <leader><space>
 " and allow the ability to toggle between that sequence and simply
 " using the <tab> key:
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
-" let SuperTabMappingForward = '<M-Space>'
+let SuperTabMappingForward = '<Leader><Space>'
 
 " Gundo
 
-nmap ,G :GundoToggle<CR>
+nmap <Leader>G :GundoToggle<CR>
 let g:gundo_right = 1
+
+" jedi
+let g:jedi#pydoc = "<Leader>d"
 
 " Easy Tags
 
-let g:easytags_cmd = '/usr/local/bin/ctags'
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 
 " Returns the current file without its extension
 function! CurrFileNoExt()
-	return substitute(@%, '\.[^\.]*$','','')
+  return substitute(@%, '\.[^\.]*$','','')
 endfunction
 
 " Language Specific Scripts:
@@ -224,82 +241,31 @@ endfunction
 
 " .vimrc file
 function! ConfigVimRC()
-	map <buffer> ,c :w<CR>:so %<CR>
-	map <buffer> ,r :w<CR>:so %<CR>
+  map <buffer> <Leader>c :w<CR>:so %<CR>
+  map <buffer> <Leader>r :w<CR>:so %<CR>
 endfunction
 
 au FileType vim   call ConfigVimRC()
 
 " DM/DME files
 function! ConfigDM()
-	map <buffer> ,c :w<CR>:!DreamMaker %<CR>
+  map <buffer> <Leader>c :w<CR>:!DreamMaker %<CR>
 endfunction
 
 au BufRead,BufNewFile *.dm setfiletype dm
 au FileType dm call ConfigDM()
 
 function! ConfigDME()
-	set filetype=dm
-	map <buffer> ,c :w<CR>:!DreamMaker %<CR>
+  set filetype=dm
+  map <buffer> <Leader>c :w<CR>:!DreamMaker %<CR>
 
-	" Run in DreamDaemon command line
-	map <buffer> ,r :!clear;DreamDaemon <C-R>=CurrFileNoExt()<CR>.dmb<CR>
+  " Run in DreamDaemon command line
+  map <buffer> <Leader>r :!clear;DreamDaemon <C-R>=CurrFileNoExt()<CR>.dmb<CR>
 
-	" Run in DreamSeeker
-	map <buffer> ,R :!clear;open <C-R>=CurrFileNoExt()<CR>.dmb<CR>
+  " Run in DreamSeeker
+  map <buffer> <Leader>R :!clear;open <C-R>=CurrFileNoExt()<CR>.dmb<CR>
 endfunction
 
 au BufRead,BufNewFile *.dme setfiletype dme
 au FileType dme call ConfigDME()
-
-" HTML files
-function! ConfigHTML()
-	map <buffer> ,r :w<CR>:!open %<CR>
-	set tabstop=2
-	set shiftwidth=2
-	set softtabstop=2
-endfunction
-
-au BufRead,BufNewFile *.scss setfiletype scss
-
-au FileType html call ConfigHTML()
-au FileType css call ConfigHTML()
-au FileType scss call ConfigHTML()
-
-" TEX files
-
-au FileType tex call ConfigTEX()
-
-function! ConfigTEX()
-    set textwidth=80
-
-    " Mark the 81st column
-    if exists('+colorcolumn')
-        set colorcolumn=+1
-    endif
-endfunction
-
-" JavaScript files
-function! ConfigJavaScript()
-	map <buffer> ,c :w<CR>:!clear;jsl -process "%"<CR>
-	set tabstop=2
-	set shiftwidth=2
-	set softtabstop=2
-endfunction
-
-au FileType javascript call ConfigJavaScript()
-
-" PHP files
-function! ConfigPHP()
-	map <buffer> ,c :w<CR>:!clear;php -l %<CR>
-endfunction
-
-au FileType php call ConfigPHP()
-
-" Objective-C files
-let g:objc_man_key="M"
-
-" set the mapleader back to \ so that plugin mappings do not 
-" interfere with my map leader (,)
-let mapleader="\\"
 
