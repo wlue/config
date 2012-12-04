@@ -1,39 +1,64 @@
-
-" Use instead of "vimfiles" on Windows
-set runtimepath^=~/.vim  
-
 set nocompatible
+syntax on
+
+set t_Co=256
+set background=dark
+colorscheme wombat256mod
 
 filetype off
 
-call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
+" Vundle
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
-filetype on
-filetype plugin on
+" Vundle
+Bundle 'gmarik/vundle'
 
-syntax on
-colorscheme wombat256mod
+" Bundles (plugins)
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'groenewege/vim-less'
+Bundle 'hail2u/vim-css3-syntax'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'kien/ctrlp.vim'
+Bundle 'majutsushi/tagbar'
+Bundle 'matthias-guenther/hammer.vim'
+Bundle 'mileszs/ack.vim'
+Bundle 'nono/vim-handlebars'
+Bundle 'rphillips/vim-zoomwin'
+Bundle 'scrooloose/nerdtree'
+Bundle 'sjl/gundo.vim'
+Bundle 'skammer/vim-css-color'
+Bundle 'tpope/vim-fugitive'
+Bundle 'vim-scripts/matchit.zip'
+Bundle 'wavded/vim-stylus'
+Bundle 'scrooloose/syntastic'
+Bundle 'davidhalter/jedi-vim'
+Bundle 'tomtom/tcomment_vim'
+
+filetype plugin indent on
 
 if has('gui_running')
+    set gfn=Inconsolata-dz\ for\ Powerline:h13,Inconsolata:h15,Consolas:h11
+    " let g:Powerline_symbols = 'fancy'
 
-	set gfn=Inconsolata-dzPowerline:h15,Inconsolata:h15,Consolas:h11
-
-	" get rid of the toolbar
-	set guioptions-=T
-
-	" get rid of scrollbars
-	set guioptions-=l
-	set guioptions-=L
-	set guioptions-=r
-	set guioptions-=R
-	
-	set mouse=a
-
+    " get rid of the toolbar/scrollbars
+    set guioptions-=T
+    set guioptions-=l
+    set guioptions-=L
+    set guioptions-=r
+    set guioptions-=R
 endif
 
+set mouse=a
 set number
 set backspace=2
+set title
+set titleold=
+set hidden
+set autoindent
+set ruler
+set history=1000
+set ch=2
 
 " By default, use spaces for tabs
 set tabstop=4
@@ -41,13 +66,8 @@ set shiftwidth=4
 set softtabstop=4
 set expandtab
 
-set ch=2
-
-set hidden
-set autoindent
-set ruler
-set title
-set history=1000
+" Highlight VCS conflict markers
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
 set shortmess=atI
 
@@ -76,6 +96,10 @@ set wildmenu
 " Automatically load file changes
 set autoread
 
+" highlight searches, and search while typing
+set hlsearch
+set incsearch
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -83,16 +107,8 @@ set autoread
 " Use , as a map leader
 let mapleader=","
 
-" highlight searches, and search while typing
-set hlsearch
-set incsearch
-
 " remote highlighting when pressing Escape
 nnoremap <silent> <ESC> :noh<cr><ESC>
-
-" trl-s for smart saving. (Don't write to file if no changes)
-nnoremap <silent><C-s> :update<Cr>
-inoremap <silent><C-s> <Esc>:update<Cr>
 
 " Map Semicolon to : for faster command execution
 nmap ; :
@@ -101,9 +117,20 @@ nmap ; :
 noremap J }
 noremap K {
 
+" let [jk] go down and up by display lines instead of real lines. Let g[jk]
+" do what [jk] normally does
+nnoremap k gk
+nnoremap j gj
+nnoremap gk k
+nnoremap gj j
+
 " + and _ switch between split screens
 nmap + <C-w>w
 nmap _ <C-w>W
+
+"<Tab> and <S-Tab> switch between split screens
+nnoremap <Tab> <C-w><C-w>
+nnoremap <S-Tab> <C-w>W
 
 " { and } switch between split screens
 nmap { :tabp<CR>
@@ -126,37 +153,32 @@ map <Leader>q <C-w>6<
 map <Leader>w <C-w>6>
 
 " Make
-nmap <Leader>m :!make<CR>
-nmap <Leader>r :!make run<CR>
+nmap <Leader>m make<CR>
+nmap <Leader>r make run<CR>
 
 " Rake
-nmap <Leader>M :!rake<CR>
+nmap <Leader>M rake<CR>
 
 " OmniCompletion
-set completeopt=longest,menuone,preview
-set omnifunc=syntaxcomplete#Complete
-set omnifunc=phpcomplete#CompletePHP
-
-" inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" set completeopt=longest,menuone,preview
+" set omnifunc=syntaxcomplete#Complete
+" set omnifunc=phpcomplete#CompletePHP
 
 
 " Plugin Related Mappings:
 
 " Powerline
-set t_Co=256
 set laststatus=2
-let g:Powerline_symbols = 'fancy'
 
-" FuzzyFinder
-nmap <Leader>ff :FufFile<CR>
-nmap <Leader>fd :FufDir<CR>
-nmap <Leader>fb :FufBuffer<CR>
-nmap <Leader>ft :FufTag<CR>
+" CtrlP
+let g:ctrlp_map = '<Leader>t'
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_clear_cache_on_exit = 1
+nnoremap <Leader>b :CtrlPBuffer<CR>
+set wildignore+=*.o,.git,*.jpg,*.png,*.swp,*.d,*.gif,*.pyc,node_modules,*.class,*.crf,*.hg,*.orig,.meteor,*.acn,*.acr,*.alg,*.aux,*.bbl,*.blg,*.dvi,*.fdb_latexmk,*.glg,*.glo,*.gls,*.idx,*.ilg,*.ind,*.ist,*.lof,*.log,*.lot,*.maf,*.mtc,*.mtc0,*.nav,*.nlo,*.out,*.pdfsync,*.ps,*.snm,*.synctex.gz,*.toc,*.vrb,*.xdy,*.pdf,*.bcf,*.run.xml
 
 " Toggle NERDTree
-"
 let NERDTreeIgnore=['\.o$', '\.d$', '\~$', '\.class$', '\.pyc']
-
 nmap <Leader>n :NERDTreeToggle<CR>
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
 					 \ exe "normal g'\"" | endif
@@ -167,7 +189,7 @@ inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
   \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
 " Toggle Tagbar
-nmap <Leader>t :TagbarToggle<CR>
+nmap <Leader>T :TagbarToggle<CR>
 
 " Show functions, methods, classes, and global variables in JavaScript
 let tlist_javascript_settings = 'javascript;f:function;m:method;c:constructor;v:variable'
@@ -183,7 +205,7 @@ let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 
 " Gundo
 
-nmap ,g :GundoToggle<CR>
+nmap ,G :GundoToggle<CR>
 let g:gundo_right = 1
 
 " Easy Tags
