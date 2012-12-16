@@ -1,8 +1,6 @@
 set nocompatible
 syntax on
 
-set background=dark
-colorscheme wombat256mod
 
 filetype off
 
@@ -33,13 +31,16 @@ Bundle 'wavded/vim-stylus'
 Bundle 'scrooloose/syntastic'
 Bundle 'davidhalter/jedi-vim'
 Bundle 'tomtom/tcomment_vim'
+Bundle 'vim-scripts/ZoomWin'
+Bundle 'tpope/vim-liquid'
+Bundle 'Glench/Vim-Jinja2-Syntax'
 Bundle 'SyntaxComplete'
 
 filetype plugin indent on
 
 if has('gui_running')
-  set gfn=Inconsolata-dz\ for\ Powerline:h13
-  let g:Powerline_symbols = 'compatible'
+  colorscheme wombat256mod
+  set gfn=Inconsolata-dz\ for\ Powerline:h12,Inconsolata:h14,Consolas:h11
 
   " get rid of the toolbar/scrollbars
   set guioptions-=T
@@ -47,7 +48,11 @@ if has('gui_running')
   set guioptions-=L
   set guioptions-=r
   set guioptions-=R
+else
+  colorscheme wombat256mod
 endif
+
+let g:Powerline_symbols = 'fancy'
 
 set mouse=a
 set number
@@ -59,7 +64,7 @@ set autoindent
 set ruler
 set history=1000
 set autoread
-set ch=2
+set ch=3
 
 " By default, use spaces for tabs
 set tabstop=4
@@ -190,6 +195,7 @@ set laststatus=2
 let g:ctrlp_map = '<Leader>t'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_clear_cache_on_exit = 1
+
 nnoremap <Leader>b :CtrlPBuffer<CR>
 set wildignore+=*.o,.git,*.jpg,*.png,*.swp,*.d,*.gif,*.pyc,node_modules,*.class,*.crf,*.hg,*.orig,.meteor,*.acn,*.acr,*.alg,*.aux,*.bbl,*.blg,*.dvi,*.fdb_latexmk,*.glg,*.glo,*.gls,*.idx,*.ilg,*.ind,*.ist,*.lof,*.log,*.lot,*.maf,*.mtc,*.mtc0,*.nav,*.nlo,*.out,*.pdfsync,*.ps,*.snm,*.synctex.gz,*.toc,*.vrb,*.xdy,*.pdf,*.bcf,*.run.xml
 
@@ -211,12 +217,7 @@ nmap <Leader>T :TagbarToggle<CR>
 let tlist_javascript_settings = 'javascript;f:function;m:method;c:constructor;v:variable'
 
 " SuperTab
-
-" SuperTab -- set default tab completion key to be <leader><space>
-" and allow the ability to toggle between that sequence and simply
-" using the <tab> key:
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
-let SuperTabMappingForward = '<Leader><Space>'
 
 " Gundo
 
@@ -225,6 +226,11 @@ let g:gundo_right = 1
 
 " jedi
 let g:jedi#pydoc = "<Leader>d"
+let g:jedi#related_names_command = "<Leader>N"
+
+" zoomwin
+
+nnoremap <Leader>z :ZoomWin<CR>
 
 " Easy Tags
 

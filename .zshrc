@@ -2,7 +2,7 @@
 export ZSH=$HOME/.oh-my-zsh
 
 # set path
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/texbin:/usr/sbin:/usr/bin:/sbin:/bin
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/heroku/bin:/usr/texbin:/usr/sbin:/usr/bin:/sbin:/bin
 export NODE_PATH=/usr/local/lib/node_modules
 
 
@@ -34,7 +34,11 @@ source $ZSH/oh-my-zsh.sh
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 
 git-pull-request () {
-	open 'http://'$(git remote -v | awk -F'([@ :])|(\\.git)' '/fetch/ {print $2"/"$3}')'/pull/new/'$(git branch --no-color  | awk '/^\* / {print $2}')
+    open 'http://'$(git remote -v | awk -F'([@ :])|(\\.git)' '/fetch/ {print $2"/"$3}')'/pull/new/'$(git branch --no-color  | awk '/^\* / {print $2}')
+}
+
+venv () {
+    source .venv/bin/activate
 }
 
 alias xo="open *.xcodeproj"
