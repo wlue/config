@@ -35,6 +35,7 @@ Bundle 'vim-scripts/ZoomWin'
 Bundle 'tpope/vim-liquid'
 Bundle 'Glench/Vim-Jinja2-Syntax'
 Bundle 'SyntaxComplete'
+Bundle 'wlue/vim-dm-syntax'
 
 filetype plugin indent on
 
@@ -258,7 +259,6 @@ function! ConfigDM()
   map <buffer> <Leader>c :w<CR>:!DreamMaker %<CR>
 endfunction
 
-au BufRead,BufNewFile *.dm setfiletype dm
 au FileType dm call ConfigDM()
 
 function! ConfigDME()
@@ -272,6 +272,5 @@ function! ConfigDME()
   map <buffer> <Leader>R :!clear;open <C-R>=CurrFileNoExt()<CR>.dmb<CR>
 endfunction
 
-au BufRead,BufNewFile *.dme setfiletype dme
 au FileType dme call ConfigDME()
 
