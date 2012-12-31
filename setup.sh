@@ -1,19 +1,25 @@
 #!/bin/bash
 
+# vi command line mode
+set -o vi
+
 # bash/zsh
-ln -s .bashrc ~/.bashrc
-ln -s .bash_profile ~/.bash_profile
-ln -s .zshrc ~/.zshrc
-ln -s .tmux.conf ~/.tmux.conf
+ln -s -f .wlue.config/.bashrc ~/.bashrc
+ln -s -f .wlue.config/.bash_profile ~/.bash_profile
+ln -s -f .wlue.config/.zshrc ~/.zshrc
+ln -s -f .wlue.config/.tmux.conf ~/.tmux.conf
 
 # vim
-ln -s .vimrc ~/.vimrc
-ln -s .xvimrc ~/.xvimrc
-ln -s .vim/ ~/.vim
+ln -s -f .wlue.config/.vimrc ~/.vimrc
+ln -s -f .wlue.config/.xvimrc ~/.xvimrc
 
-git submodule update --init --recursive     # Pull vundle submodule
+rm ~/.vim
+ln -s -f .wlue.config/.vim/ ~/.vim
+
+# Pull vundle submodule
+git submodule update --init --recursive
 
 # git
-ln -s .gitconfig ~/.gitconfig
-ln -s .gitignore_global ~/.gitignore_global
+ln -s -f .wlue.config/.gitconfig ~/.gitconfig
+ln -s -f .wlue.config/.gitignore_global ~/.gitignore_global
 
