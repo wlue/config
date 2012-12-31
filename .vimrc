@@ -168,8 +168,8 @@ map <Leader>q <C-w>6<
 map <Leader>w <C-w>6>
 
 " Make
-nmap <Leader>m make<CR>
-nmap <Leader>r make run<CR>
+nmap <Leader>m :make<CR>
+nmap <Leader>r :make run<CR>
 
 " Rake
 nmap <Leader>M rake<CR>
