@@ -31,6 +31,8 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 
+# set -o vi
+
 git-pull-request () {
     open 'http://'$(git remote -v | awk -F'([@ :])|(\\.git)' '/fetch/ {print $2"/"$3}')'/pull/new/'$(git branch --no-color  | awk '/^\* / {print $2}')
 }
