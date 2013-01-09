@@ -39,6 +39,7 @@ Bundle 'Glench/Vim-Jinja2-Syntax'
 Bundle 'wlue/vim-dm-syntax'
 Bundle 'nono/vim-handlebars'
 Bundle 'othree/html5.vim'
+Bundle 'derekwyatt/vim-scala'
 
 filetype plugin indent on
 
