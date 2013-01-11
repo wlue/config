@@ -11,3 +11,5 @@
 
 [diff]
     tool = vimdiff
+[github]
+	user = wlue

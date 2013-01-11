@@ -1,7 +1,9 @@
+" vimrc configuration file
+" Author: Wen-Hao Lue <me@wenhaolue.com>
+
+" Use Vundle for plugin management.
 set nocompatible
 syntax on
-
-
 filetype off
 
 " Vundle:
@@ -25,6 +27,7 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'vim-scripts/matchit.zip'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'vim-scripts/ZoomWin'
+Bundle 'Rip-Rip/clang_complete'
 
 " Syntax plugins
 Bundle 'SyntaxComplete'
@@ -37,25 +40,29 @@ Bundle 'jelera/vim-javascript-syntax'
 Bundle 'tpope/vim-liquid'
 Bundle 'Glench/Vim-Jinja2-Syntax'
 Bundle 'wlue/vim-dm-syntax'
+Bundle 'wlue/vim-objc-strings-syntax'
 Bundle 'nono/vim-handlebars'
 Bundle 'othree/html5.vim'
 Bundle 'derekwyatt/vim-scala'
 
 filetype plugin indent on
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Vim Settings:
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 colorscheme wombat256mod
 if has('gui_running')
   set gfn=Inconsolata-dz\ for\ Powerline:h12,Inconsolata:h14,Consolas:h11
 
-  " get rid of the toolbar/scrollbars
+  " Get rid of the toolbar/scrollbars.
   set guioptions-=T
   set guioptions-=l
   set guioptions-=L
   set guioptions-=r
   set guioptions-=R
 endif
-
-let g:Powerline_symbols = 'fancy'
 
 set mouse=a
 set number
@@ -67,7 +74,7 @@ set autoindent
 set ruler
 set history=1000
 set autoread
-set ch=3
+set laststatus=2
 
 " By default, use spaces for tabs, and 4 spaces.
 set tabstop=4
@@ -87,10 +94,12 @@ endif
 " Highlight VCS conflict markers.
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
 
-set shortmess=atI
+" set shortmess=a
+set cmdheight=2
 
 " Show trailing spaces.
-set list listchars=tab:\ \ ,trail:·
+set list
+set listchars=tab:\ \ ,trail:·
 
 " Only case sensitive if a capital letter exists in a search query.
 set ignorecase
@@ -190,7 +199,7 @@ endif
 let g:objc_man_key="M"
 
 " Powerline
-set laststatus=2
+let g:Powerline_symbols = 'fancy'
 
 " CtrlP
 let g:ctrlp_map = '<Leader>t'
