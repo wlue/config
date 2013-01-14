@@ -11,5 +11,9 @@
 
 [diff]
     tool = vimdiff
+
 [github]
-	user = wlue
+    user = wlue
+
+[push]
+    default = simple
