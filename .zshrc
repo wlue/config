@@ -2,9 +2,7 @@
 export ZSH=$HOME/.oh-my-zsh
 
 # set path
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/heroku/bin:/usr/texbin:/usr/sbin:/usr/bin:/sbin:/bin
-export NODE_PATH=/usr/local/lib/node_modules
-
+export PATH=/opt/twitter/bin:/opt/twitter/sbin:/usr/local/git/bin:/usr/local/mysql/bin:/Users/wlue/bin:/Users/wlue/.twitools/src/twitter-utilities/sbt:/Users/wlue/.twitools/src/twitter-utilities/sbt11:/Users/wlue/.twitools/src/twitter-utilities/bin:$PATH
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
