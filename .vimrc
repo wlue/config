@@ -44,6 +44,7 @@ Bundle 'wlue/vim-objc-strings-syntax'
 Bundle 'nono/vim-handlebars'
 Bundle 'othree/html5.vim'
 Bundle 'derekwyatt/vim-scala'
+Bundle 'juvenn/mustache.vim'
 
 filetype plugin indent on
 
