@@ -75,6 +75,7 @@ set ruler
 set history=1000
 set autoread
 set laststatus=2
+set nofoldenable
 
 " By default, use spaces for tabs, and 4 spaces.
 set tabstop=4
