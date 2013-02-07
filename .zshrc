@@ -26,6 +26,10 @@ plugins=(git osx brew zsh-syntax-highlighting vagrant virtualenv pip)
 
 source $ZSH/oh-my-zsh.sh
 
+# Twitter stuff
+export JAVA_TOOL_OPTIONS="-Dfile.encoding=utf8"
+export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=128m"
+
 # Customize to your needs...
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 
