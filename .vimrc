@@ -244,7 +244,7 @@ let g:jedi#related_names_command = "<Leader>N"
 nnoremap <Leader>z :ZoomWin<CR>
 
 " Tagbar
-let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+let g:tagbar_ctags_bin = '/opt/twitter/bin/ctags'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
