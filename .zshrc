@@ -33,8 +33,6 @@ export MAVEN_OPTS="-Xmx1024m -XX:MaxPermSize=128m"
 # Customize to your needs...
 # [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 
-# set -o vi
-
 git-pull-request () {
     open 'http://'$(git remote -v | awk -F'([@ :])|(\\.git)' '/fetch/ {print $2"/"$3}')'/pull/new/'$(git branch --no-color  | awk '/^\* / {print $2}')
 }
@@ -44,7 +42,7 @@ venv () {
 }
 
 h () {
-    history | grep $* | tail
+    history | grep $* | sort -k2 | uniq -f 2 | sort -n | tail -n 10
 }
 
 alias xo="open *.xcodeproj"
