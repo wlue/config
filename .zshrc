@@ -41,6 +41,10 @@ venv () {
     source .venv/bin/activate
 }
 
+h () {
+    history | grep $* | tail
+}
+
 alias xo="open *.xcodeproj"
 
 bindkey "^[[A" history-search-backward
