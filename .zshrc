@@ -35,6 +35,14 @@ git-pull-request () {
     open 'http://'$(git remote -v | awk -F'([@ :])|(\\.git)' '/fetch/ {print $2"/"$3}')'/pull/new/'$(git branch --no-color  | awk '/^\* / {print $2}')
 }
 
+chrome () {
+    app="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+    (
+     ${app} --user-data-dir=$1 > /dev/null 2>&1;
+     rm -r $1
+    ) &
+}
+
 venv () {
     source .venv/bin/activate
 }
