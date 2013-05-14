@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# vi command line mode
-set -o vi
-
 # bash/zsh
 ln -s -f .wlue.config/.bashrc ~/.bashrc
 ln -s -f .wlue.config/.bash_profile ~/.bash_profile
