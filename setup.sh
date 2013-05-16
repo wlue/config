@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if [[ $1 == 'local' ]]; then
-    echo "Configuring for server shell."
-elif [[ $1 == 'server' ]]; then
     echo "Configuring for OSX shell."
+elif [[ $1 == 'server' ]]; then
+    echo "Configuring for server shell."
 else
     echo "Usage: "
     echo "  ./setup.sh local   -- configure for OSX"
