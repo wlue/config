@@ -13,16 +13,16 @@ else
 fi
 
 # Always use zsh if possible.
-if [ -n $(which zsh) ]; then
-    echo "  zsh installed!"
-    if [ ! -n "$ZSH_VERSION" ]; then
-        chsh -s /bin/zsh
-    else
-        echo "  zsh already being used."
-    fi
-else
+command -v zsh >/dev/null 2>&1 || { 
     echo "  \033[0;33mAre you sure you have installed zsh?\033[0m"
-    exit
+    exit 1; 
+}
+
+echo "  zsh installed!"
+if [ -n "$ZSH_VERSION" ]; then
+    chsh -s /bin/zsh
+else
+    echo "  zsh already being used."
 fi
 
 # Pull vundle submodule
