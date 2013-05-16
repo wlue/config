@@ -1,3 +1,5 @@
+" xvimrc configuration file
+" Author: Wen-Hao Lue <me@wenhaolue.com>
 
 " Map Semicolon to : for faster command execution
 nmap ; :

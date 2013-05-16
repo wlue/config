@@ -1,7 +1,18 @@
 #!/bin/bash
 
+# Symlink arg 1 from arg 2.
+symlink () {
+    [ -e $2 ] && rm $2; ln -s $1 $2
+}
+
+# Symlink directory $1 from directory $2
+symlink_dir () {
+    [ -d $2 ] && rm -rf $2; ln -s $1 $2
+}
+
+
 if [[ $1 == 'local' ]]; then
-    echo "Configuring for OSX shell."
+    echo "Configuring for local shell."
 elif [[ $1 == 'server' ]]; then
     echo "Configuring for server shell."
 else
@@ -14,7 +25,7 @@ fi
 
 # Always use zsh if possible.
 command -v zsh >/dev/null 2>&1 || { 
-    echo "  \033[0;33mAre you sure you have installed zsh?\033[0m"
+    echo "  zsh is not installed."
     exit 1; 
 }
 
@@ -35,27 +46,24 @@ echo "Setting up oh-my-zsh..."
 
 # bash/zsh
 echo "Setting up symlinks..."
-ln -s -f .wlue.config/.bashrc ~/.bashrc
-ln -s -f .wlue.config/.bash_profile ~/.bash_profile
-ln -s -f .wlue.config/.zshrc ~/.zshrc
-ln -s -f .wlue.config/.tmux.conf ~/.tmux.conf
+symlink ~/.wlue.config/.bash_profile ~/.bash_profile
+symlink ~/.wlue.config/.bashrc ~/.bashrc
+symlink ~/.wlue.config/.zshrc ~/.zshrc
+symlink ~/.wlue.config/.tmux.conf ~/.tmux.conf
 
 # vim
-ln -s -f .wlue.config/.vimrc ~/.vimrc
-
+symlink_dir ~/.wlue.config/.vim ~/.vim
+symlink ~/.wlue.config/.vimrc ~/.vimrc
 if [[ $1 == 'local' ]]; then
-    ln -s -f .wlue.config/.xvimrc ~/.xvimrc
+    symlink ~/.wlue.config/.xvimrc ~/.xvimrc
 fi
 
-rm ~/.vim
-ln -s -f .wlue.config/.vim/ ~/.vim
-
 # git
-ln -s -f .wlue.config/.gitignore_global ~/.gitignore_global
+symlink ~/.wlue.config/.gitignore_global ~/.gitignore_global
 if [[ $1 == 'local' ]]; then
-    ln -s -f .wlue.config/.gitconfig ~/.gitconfig
+    symlink ~/.wlue.config/.gitconfig ~/.gitconfig
 elif [[ $1 == 'server' ]]; then
-    ln -s -f .wlue.config/.gitconfig_server ~/.gitconfig
+    symlink ~/.wlue.config/.gitconfig_server ~/.gitconfig
 fi
 
 echo "Done!"
