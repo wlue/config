@@ -42,7 +42,7 @@ git submodule update --init --recursive
 
 # Set up oh-my-zsh.
 echo "Setting up oh-my-zsh..."
-[ -d ~/.oh-my-zsh ] && (cd ~/.oh-my-zsh && git pull) || git clone git@github.com:wlue/oh-my-zsh.git ~/.oh-my-zsh
+[ -d ~/.oh-my-zsh ] && (cd ~/.oh-my-zsh && git pull) || git clone git://github.com/wlue/oh-my-zsh.git ~/.oh-my-zsh
 
 # bash/zsh
 echo "Setting up symlinks..."
