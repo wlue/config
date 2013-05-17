@@ -47,6 +47,7 @@ Bundle 'derekwyatt/vim-scala'
 Bundle 'juvenn/mustache.vim'
 Bundle 'wlue/thrift.vim'
 Bundle 'rodjek/vim-puppet'
+Bundle 'evanmiller/nginx-vim-syntax'
 
 filetype plugin indent on
 
