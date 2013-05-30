@@ -2,12 +2,14 @@
 
 # Symlink arg 1 from arg 2.
 symlink () {
-    [ -e $2 ] && rm $2; ln -s $1 $2
+    [ -e $2 ] && (rm $2; echo "  rm $2"); ln -s $1 $2
+    echo "  ln -s $1 $2"
 }
 
 # Symlink directory $1 from directory $2
 symlink_dir () {
-    [ -d $2 ] && rm -rf $2; ln -s $1 $2
+    [ -d $2 ] && (rm $2; echo "  rm $2"); ln -s $1 $2
+    echo "  ln -s $1 $2"
 }
 
 
@@ -46,24 +48,24 @@ echo "Setting up oh-my-zsh..."
 
 # bash/zsh
 echo "Setting up symlinks..."
-symlink ~/.wlue.config/bash_profile ~/.bash_profile
-symlink ~/.wlue.config/bashrc ~/.bashrc
-symlink ~/.wlue.config/zshrc ~/.zshrc
-symlink ~/.wlue.config/tmux.conf ~/.tmux.conf
+symlink "$(pwd)/bash_profile"   ~/.bash_profile
+symlink "$(pwd)/bashrc"         ~/.bashrc
+symlink "$(pwd)/zshrc"          ~/.zshrc
+symlink "$(pwd)/tmux.conf"      ~/.tmux.conf
 
 # vim
-symlink_dir ~/.wlue.config/vim ~/.vim
-symlink ~/.wlue.config/vimrc ~/.vimrc
+symlink_dir "$(pwd)/vim"        ~/.vim
+symlink "$(pwd)/vimrc"          ~/.vimrc
 if [[ $1 == 'local' ]]; then
-    symlink ~/.wlue.config/xvimrc ~/.xvimrc
+    symlink "$(pwd)/xvimrc"     ~/.xvimrc
 fi
 
 # git
-symlink ~/.wlue.config/gitignore_global ~/.gitignore_global
+symlink "$(pwd)/gitignore_global"       ~/.gitignore_global
 if [[ $1 == 'local' ]]; then
-    symlink ~/.wlue.config/gitconfig ~/.gitconfig
+    symlink "$(pwd)/gitconfig"          ~/.gitconfig
 elif [[ $1 == 'server' ]]; then
-    symlink ~/.wlue.config/gitconfig_server ~/.gitconfig
+    symlink "$(pwd)/gitconfig_server"   ~/.gitconfig
 fi
 
 echo "Done!"
