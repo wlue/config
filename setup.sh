@@ -46,24 +46,24 @@ echo "Setting up oh-my-zsh..."
 
 # bash/zsh
 echo "Setting up symlinks..."
-symlink ~/.wlue.config/.bash_profile ~/.bash_profile
-symlink ~/.wlue.config/.bashrc ~/.bashrc
-symlink ~/.wlue.config/.zshrc ~/.zshrc
-symlink ~/.wlue.config/.tmux.conf ~/.tmux.conf
+symlink ~/.wlue.config/bash_profile ~/.bash_profile
+symlink ~/.wlue.config/bashrc ~/.bashrc
+symlink ~/.wlue.config/zshrc ~/.zshrc
+symlink ~/.wlue.config/tmux.conf ~/.tmux.conf
 
 # vim
-symlink_dir ~/.wlue.config/.vim ~/.vim
-symlink ~/.wlue.config/.vimrc ~/.vimrc
+symlink_dir ~/.wlue.config/vim ~/.vim
+symlink ~/.wlue.config/vimrc ~/.vimrc
 if [[ $1 == 'local' ]]; then
-    symlink ~/.wlue.config/.xvimrc ~/.xvimrc
+    symlink ~/.wlue.config/xvimrc ~/.xvimrc
 fi
 
 # git
-symlink ~/.wlue.config/.gitignore_global ~/.gitignore_global
+symlink ~/.wlue.config/gitignore_global ~/.gitignore_global
 if [[ $1 == 'local' ]]; then
-    symlink ~/.wlue.config/.gitconfig ~/.gitconfig
+    symlink ~/.wlue.config/gitconfig ~/.gitconfig
 elif [[ $1 == 'server' ]]; then
-    symlink ~/.wlue.config/.gitconfig_server ~/.gitconfig
+    symlink ~/.wlue.config/gitconfig_server ~/.gitconfig
 fi
 
 echo "Done!"

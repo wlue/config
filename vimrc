@@ -29,6 +29,9 @@ Bundle 'tomtom/tcomment_vim'
 Bundle 'vim-scripts/ZoomWin'
 Bundle 'Rip-Rip/clang_complete'
 
+" Color
+Bundle 'altercation/vim-colors-solarized'
+
 " Syntax plugins
 Bundle 'SyntaxComplete'
 Bundle 'scrooloose/syntastic'
