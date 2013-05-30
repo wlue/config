@@ -2,13 +2,13 @@
 
 # Symlink arg 1 from arg 2.
 symlink () {
-    [ -e $2 ] && (rm $2; echo "  rm $2"); ln -s $1 $2
+    [ -L $2 ] && (rm $2; echo "  rm $2"); ln -s $1 $2
     echo "  ln -s $1 $2"
 }
 
 # Symlink directory $1 from directory $2
 symlink_dir () {
-    [ -d $2 ] && (rm $2; echo "  rm $2"); ln -s $1 $2
+    [ -L $2 ] && (rm $2; echo "  rm $2"); ln -s $1 $2
     echo "  ln -s $1 $2"
 }
 
