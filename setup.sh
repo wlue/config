@@ -25,19 +25,6 @@ else
     exit
 fi
 
-# Always use zsh if possible.
-command -v zsh >/dev/null 2>&1 || { 
-    echo "  zsh is not installed."
-    exit 1; 
-}
-
-echo "  zsh installed!"
-if [ -n "$ZSH_VERSION" ]; then
-    chsh -s /bin/zsh
-else
-    echo "  zsh already being used."
-fi
-
 # Pull vundle submodule
 echo "Pulling configuration submodules..."
 git submodule update --init --recursive
@@ -49,6 +36,11 @@ echo "Setting up oh-my-zsh..."
 # bash/zsh
 echo "Setting up symlinks..."
 symlink "$(pwd)/bash_profile"   ~/.bash_profile
+if [[ $1 == 'local' ]]; then
+    symlink "$(pwd)/bash_aliases_osx"       ~/.bash_aliases
+elif [[ $1 == 'server' ]]; then
+    symlink "$(pwd)/bash_aliases_linux"     ~/.bash_aliases
+fi
 symlink "$(pwd)/bashrc"         ~/.bashrc
 symlink "$(pwd)/zshrc"          ~/.zshrc
 symlink "$(pwd)/tmux.conf"      ~/.tmux.conf
