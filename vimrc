@@ -52,6 +52,8 @@ Bundle 'juvenn/mustache.vim'
 Bundle 'wlue/thrift.vim'
 Bundle 'rodjek/vim-puppet'
 Bundle 'evanmiller/nginx-vim-syntax'
+Bundle 'myhere/vim-nodejs-complete'
+Bundle 'pangloss/vim-javascript'
 
 filetype plugin indent on
 
@@ -219,7 +221,7 @@ nnoremap <Leader>b :CtrlPBuffer<CR>
 set wildignore+=*.o,.git,*.jpg,*.png,*.swp,*.d,*.gif,*.pyc,node_modules,*.class,*.crf,*.hg,*.orig,.meteor,*.acn,*.acr,*.alg,*.aux,*.bbl,*.blg,*.dvi,*.fdb_latexmk,*.glg,*.glo,*.gls,*.idx,*.ilg,*.ind,*.ist,*.lof,*.log,*.lot,*.maf,*.mtc,*.mtc0,*.nav,*.nlo,*.out,*.pdfsync,*.ps,*.snm,*.synctex.gz,*.toc,*.vrb,*.xdy,*.pdf,*.bcf,*.run.xml
 
 " Toggle NERDTree
-let NERDTreeIgnore=['\.o$', '\.d$', '\~$', '\.class$', '\.pyc', '.DS_Store']
+let NERDTreeIgnore=['\.o$', '\.d$', '\~$', '\.class$', '\.pyc', '.DS_Store', 'node_modules/']
 nmap <Leader>n :NERDTreeToggle<CR>
 au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
       \ exe "normal g'\"" | endif

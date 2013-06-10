@@ -60,5 +60,7 @@ elif [[ $1 == 'server' ]]; then
     symlink "$(pwd)/gitconfig_server"   ~/.gitconfig
 fi
 
+symlink "$(pwd)/npmrc"          ~/.npmrc
+
 echo "Done!"
 
