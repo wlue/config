@@ -14,6 +14,11 @@ export ZSH_THEME="robbyrussell"
 # Comment this out to disable weekly auto-update checks
 export DISABLE_AUTO_UPDATE="true"
 
+# Don't make tmux change titles.
+export DISABLE_AUTO_TITLE="true"
+
+export EDITOR='vim'
+
 # Plugins (can be found in ~/.oh-my-zsh/plugins/*)
 plugins=(git osx brew zsh-syntax-highlighting vagrant virtualenv pip)
 

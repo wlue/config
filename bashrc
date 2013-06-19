@@ -25,6 +25,7 @@ if [[ -n "$PS1" ]]; then
 
     export PS1="  \[\e[32;1m\]\u\[\e[0m\]\[\e[32m\]@\h\[\e[36m\]\w \[\e[33m\]\$ \[\e[0m\]"
     export CLICOLOR=1
+    export EDITOR='vim'
 
     # Alias definitions.
     if [ -f ~/.bash_aliases ]; then

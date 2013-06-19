@@ -52,6 +52,9 @@ if [[ $1 == 'local' ]]; then
     symlink "$(pwd)/xvimrc"     ~/.xvimrc
 fi
 
+# tmuxinator
+symlink_dir "$(pwd)/tmuxinator"    ~/.tmuxinator
+
 # git
 symlink "$(pwd)/gitignore_global"       ~/.gitignore_global
 if [[ $1 == 'local' ]]; then
