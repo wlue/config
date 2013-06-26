@@ -12,10 +12,9 @@ symlink_dir () {
     echo "  ln -s $1 $2"
 }
 
-
 if [[ $1 == 'local' ]]; then
     echo "Configuring for local shell."
-elif [[ $1 == 'server' ]]; then
+elif [[ $1 == 'linux' ]]; then
     echo "Configuring for server shell."
 else
     echo "Usage: "
@@ -38,7 +37,7 @@ echo "Setting up symlinks..."
 symlink "$(pwd)/bash_profile"   ~/.bash_profile
 if [[ $1 == 'local' ]]; then
     symlink "$(pwd)/bash_aliases_osx"       ~/.bash_aliases
-elif [[ $1 == 'server' ]]; then
+elif [[ $1 == 'linux' ]]; then
     symlink "$(pwd)/bash_aliases_linux"     ~/.bash_aliases
 fi
 symlink "$(pwd)/bashrc"         ~/.bashrc
@@ -52,14 +51,11 @@ if [[ $1 == 'local' ]]; then
     symlink "$(pwd)/xvimrc"     ~/.xvimrc
 fi
 
-# tmuxinator
-symlink_dir "$(pwd)/tmuxinator"    ~/.tmuxinator
-
 # git
 symlink "$(pwd)/gitignore_global"       ~/.gitignore_global
 if [[ $1 == 'local' ]]; then
     symlink "$(pwd)/gitconfig"          ~/.gitconfig
-elif [[ $1 == 'server' ]]; then
+elif [[ $1 == 'linux' ]]; then
     symlink "$(pwd)/gitconfig_server"   ~/.gitconfig
 fi
 
