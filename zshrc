@@ -5,7 +5,7 @@
 export ZSH=$HOME/.oh-my-zsh
 
 # set path
-export PATH=/usr/local/sbin:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/heroku/bin:/usr/texbin:/usr/sbin:/usr/bin:/sbin:/bin
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/local/share/npm/bin:/usr/local/heroku/bin:/usr/texbin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH
 export NODE_PATH=/usr/local/lib/node_modules
 
 # Set name of the theme to load.
@@ -23,9 +23,6 @@ export EDITOR='vim'
 plugins=(git osx brew zsh-syntax-highlighting vagrant virtualenv pip)
 
 source $ZSH/oh-my-zsh.sh
-
-# Customize to your needs...
-# [[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  # This loads RVM into a shell session.
 
 # Open GitHub pull request web interface.
 git-pull-request () {
@@ -56,4 +53,8 @@ alias xo="open *.xcodeproj"
 
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
+
+# RVM
+export PATH=$PATH:$HOME/.rvm/bin
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
 

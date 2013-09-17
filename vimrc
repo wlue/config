@@ -55,7 +55,6 @@ Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'myhere/vim-nodejs-complete'
 Bundle 'pangloss/vim-javascript'
 Bundle 'guns/vim-clojure-static'
-Bundle 'tpope/vim-classpath'
 
 filetype plugin indent on
 

@@ -33,3 +33,5 @@ if [[ -n "$PS1" ]]; then
     fi
 fi
 
+
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
