@@ -1,1 +1,1 @@
-au! Bufread,BufNewFile *.pdc    set filetype=pdc
+au! BufRead,BufNewFile *.pdc set filetype=pdc
