@@ -97,6 +97,9 @@ set expandtab
 " 80 character limit default.
 set textwidth=80
 
+" Copy/paste from terminal vim
+set clipboard=unnamed
+
 " Mark the 81st column.
 if exists('+colorcolumn')
   set colorcolumn=+1
