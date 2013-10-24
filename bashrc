@@ -27,11 +27,11 @@ if [[ -n "$PS1" ]]; then
     export CLICOLOR=1
     export EDITOR='vim'
 
+    if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
     # Alias definitions.
     if [ -f ~/.bash_aliases ]; then
         . ~/.bash_aliases
     fi
 fi
 
-
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting

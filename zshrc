@@ -16,8 +16,7 @@ export DISABLE_AUTO_UPDATE="true"
 
 # Don't make tmux change titles.
 export DISABLE_AUTO_TITLE="true"
-
-export EDITOR='vim'
+export EDITOR="vim"
 
 # Plugins (can be found in ~/.oh-my-zsh/plugins/*)
 plugins=(git osx brew zsh-syntax-highlighting vagrant virtualenv pip)
@@ -54,7 +53,6 @@ alias xo="open *.xcodeproj"
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
 
-# RVM
-export PATH=$PATH:$HOME/.rvm/bin
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"
+# rbenv
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
