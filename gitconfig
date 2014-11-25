@@ -17,3 +17,8 @@
 
 [push]
     default = simple
+[grep]
+	lineNumber = true
+	extendRegexp = true
+[alias]
+	g = grep --break --heading --line-number

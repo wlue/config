@@ -28,6 +28,7 @@ Bundle 'vim-scripts/matchit.zip'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'vim-scripts/ZoomWin'
 Bundle 'Rip-Rip/clang_complete'
+Bundle 'benmills/vimux'
 
 " Color
 Bundle 'altercation/vim-colors-solarized'
@@ -55,6 +56,8 @@ Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'myhere/vim-nodejs-complete'
 Bundle 'pangloss/vim-javascript'
 Bundle 'guns/vim-clojure-static'
+Bundle 'hynek/vim-python-pep8-indent'
+Bundle 'hdima/python-syntax'
 
 filetype plugin indent on
 
@@ -195,6 +198,11 @@ nmap <Leader>r :make run<CR>
 " Rake
 nmap <Leader>M :!rake<CR>
 
+" Syntastic
+"
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_checker_args='--ignore=E501,E225'
+
 " OmniCompletion
 set completeopt=longest,menuone,preview
 
@@ -249,8 +257,8 @@ nmap <Leader>G :GundoToggle<CR>
 let g:gundo_right = 1
 
 " jedi
-let g:jedi#pydoc = "<Leader>d"
-let g:jedi#related_names_command = "<Leader>N"
+let g:jedi#documentation_command = "<Leader>d"
+let g:jedi#usages_command = "<Leader>N"
 
 " zoomwin
 nnoremap <Leader>z :ZoomWin<CR>

@@ -23,6 +23,9 @@ plugins=(git osx brew zsh-syntax-highlighting vagrant virtualenv pip)
 
 source $ZSH/oh-my-zsh.sh
 
+# autojump
+[[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
+
 # Open GitHub pull request web interface.
 git-pull-request () {
     open 'http://'$(git remote -v | awk -F'([@ :])|(\\.git)' '/fetch/ {print $2"/"$3}')'/pull/new/'$(git branch --no-color  | awk '/^\* / {print $2}')
@@ -49,6 +52,7 @@ h () {
 
 # Open Xcode Projects quickly.
 alias xo="open *.xcodeproj"
+alias wo="open *.xcworkspace"
 
 bindkey "^[[A" history-search-backward
 bindkey "^[[B" history-search-forward
