@@ -60,3 +60,7 @@ bindkey "^[[B" history-search-forward
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
+# nvm
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
+

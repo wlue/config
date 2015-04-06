@@ -13,51 +13,48 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Plugins:
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp.vim'
-Bundle 'majutsushi/tagbar'
-Bundle 'sjl/gundo.vim'
-Bundle 'matthias-guenther/hammer.vim'
-Bundle 'mileszs/ack.vim'
-Bundle 'davidhalter/jedi-vim'
-Bundle 'vim-scripts/cocoa.vim'
-Bundle 'rphillips/vim-zoomwin'
-Bundle 'tpope/vim-fugitive'
-Bundle 'vim-scripts/matchit.zip'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'vim-scripts/ZoomWin'
-Bundle 'Rip-Rip/clang_complete'
-Bundle 'benmills/vimux'
-
-" Color
-Bundle 'altercation/vim-colors-solarized'
+Plugin 'Lokaltog/vim-powerline'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'majutsushi/tagbar'
+Plugin 'sjl/gundo.vim'
+Plugin 'matthias-guenther/hammer.vim'
+Plugin 'mileszs/ack.vim'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'vim-scripts/cocoa.vim'
+Plugin 'rphillips/vim-zoomwin'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-scripts/matchit.zip'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'vim-scripts/ZoomWin'
+Plugin 'Rip-Rip/clang_complete'
+Plugin 'benmills/vimux'
 
 " Syntax plugins
-Bundle 'SyntaxComplete'
-Bundle 'scrooloose/syntastic'
-Bundle 'groenewege/vim-less'
-Bundle 'skammer/vim-css-color'
-Bundle 'hail2u/vim-css3-syntax'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'tpope/vim-liquid'
-Bundle 'Glench/Vim-Jinja2-Syntax'
-Bundle 'wlue/vim-dm-syntax'
-Bundle 'wlue/vim-objc-strings-syntax'
-Bundle 'wlue/go.vim'
-Bundle 'nono/vim-handlebars'
-Bundle 'othree/html5.vim'
-Bundle 'derekwyatt/vim-scala'
-Bundle 'juvenn/mustache.vim'
-Bundle 'wlue/thrift.vim'
-Bundle 'rodjek/vim-puppet'
-Bundle 'evanmiller/nginx-vim-syntax'
-Bundle 'myhere/vim-nodejs-complete'
-Bundle 'pangloss/vim-javascript'
-Bundle 'guns/vim-clojure-static'
-Bundle 'hynek/vim-python-pep8-indent'
-Bundle 'hdima/python-syntax'
+Plugin 'SyntaxComplete'
+Plugin 'scrooloose/syntastic'
+Plugin 'groenewege/vim-less'
+Plugin 'skammer/vim-css-color'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'kchmck/vim-coffee-script'
+Plugin 'tpope/vim-liquid'
+Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'wlue/vim-dm-syntax'
+Plugin 'wlue/vim-objc-strings-syntax'
+Plugin 'wlue/go.vim'
+Plugin 'nono/vim-handlebars'
+Plugin 'othree/html5.vim'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'juvenn/mustache.vim'
+Plugin 'wlue/thrift.vim'
+Plugin 'rodjek/vim-puppet'
+Plugin 'evanmiller/nginx-vim-syntax'
+Plugin 'guns/vim-clojure-static'
+Plugin 'hynek/vim-python-pep8-indent'
+Plugin 'hdima/python-syntax'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+
 
 filetype plugin indent on
 
@@ -199,9 +196,10 @@ nmap <Leader>r :make run<CR>
 nmap <Leader>M :!rake<CR>
 
 " Syntastic
-"
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_checker_args='--ignore=E501,E225'
+
+let g:syntastic_javascript_checkers = ['eslint']
 
 " OmniCompletion
 set completeopt=longest,menuone,preview
@@ -223,6 +221,9 @@ let g:objc_man_key="M"
 
 " Powerline
 let g:Powerline_symbols = 'fancy'
+
+" Airline
+let g:airline_powerline_fonts=1
 
 " CtrlP
 let g:ctrlp_map = '<Leader>t'
@@ -266,6 +267,11 @@ nnoremap <Leader>z :ZoomWin<CR>
 " Tagbar
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 
+" vim-javascript
+let g:javascript_enable_domhtmlcss = 1
+
+" vim-jsx
+let g:jsx_ext_required = 0
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Functions:
