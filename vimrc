@@ -267,9 +267,6 @@ nnoremap <Leader>z :ZoomWin<CR>
 " Tagbar
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 
-" vim-javascript
-let g:javascript_enable_domhtmlcss = 1
-
 " vim-jsx
 let g:jsx_ext_required = 0
 
