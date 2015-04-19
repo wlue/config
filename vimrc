@@ -54,6 +54,7 @@ Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'hdima/python-syntax'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
+Plugin 'toyamarinyon/vim-swift'
 
 
 filetype plugin indent on
@@ -266,6 +267,10 @@ nnoremap <Leader>z :ZoomWin<CR>
 
 " Tagbar
 let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
+
+" vim-javascript
+let javascript_enable_domhtmlcss = 1
+let b:javascript_fold = 0
 
 " vim-jsx
 let g:jsx_ext_required = 0
