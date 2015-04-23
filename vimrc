@@ -173,6 +173,10 @@ nnoremap <S-Tab> <C-w>W
 " nmap + <C-w>w
 " nmap _ <C-w>W
 
+" To make Shift-Tab work in terminal vim
+map <Esc>[Z <s-tab>
+ounmap <Esc>[Z
+
 " Ctrl-P brings back to previous file in buffer.
 nmap <C-p> <C-^>
 imap <C-p> <C-^>
