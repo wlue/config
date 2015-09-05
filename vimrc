@@ -55,6 +55,7 @@ Plugin 'hdima/python-syntax'
 Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'toyamarinyon/vim-swift'
+Plugin 'mustache/vim-mustache-handlebars'
 
 
 filetype plugin indent on

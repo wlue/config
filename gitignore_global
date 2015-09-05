@@ -4,8 +4,8 @@
 *.pyc
 .svn
 Thumbs.db
-Icon?
 *.swp
 tags
 *.swo
 .venv
+.env
