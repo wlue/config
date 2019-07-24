@@ -15,7 +15,7 @@ Bundle 'gmarik/vundle'
 " Plugins:
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'scrooloose/nerdtree'
-Plugin 'kien/ctrlp.vim'
+Plugin 'junegunn/fzf.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'sjl/gundo.vim'
 Plugin 'matthias-guenther/hammer.vim'
@@ -197,7 +197,6 @@ map <Leader>w <C-w>6>
 
 " Make
 nmap <Leader>m :make<CR>
-nmap <Leader>r :make run<CR>
 
 " Rake
 nmap <Leader>M :!rake<CR>
@@ -218,6 +217,8 @@ if has("autocmd") && exists("+omnifunc")
         \ endif
 endif
 
+set rtp+=/usr/local/opt/fzf
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Mappings:
@@ -232,13 +233,17 @@ let g:Powerline_symbols = 'fancy'
 " Airline
 let g:airline_powerline_fonts=1
 
-" CtrlP
-let g:ctrlp_map = '<Leader>t'
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_clear_cache_on_exit = 1
+" fzf
+nnoremap <silent> <leader>t :Files<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
 
-nnoremap <Leader>b :CtrlPBuffer<CR>
+" CtrlP
+" let g:ctrlp_map = '<Leader>t'
+" let g:ctrlp_switch_buffer = 0
+" let g:ctrlp_working_path_mode = 0
+" let g:ctrlp_clear_cache_on_exit = 1
+
+" nnoremap <Leader>b :CtrlPBuffer<CR>
 set wildignore+=*.o,.git,*.jpg,*.png,*.swp,*.d,*.gif,*.pyc,node_modules,*.class,*.crf,*.hg,*.orig,.meteor,*.acn,*.acr,*.alg,*.aux,*.bbl,*.blg,*.dvi,*.fdb_latexmk,*.glg,*.glo,*.gls,*.idx,*.ilg,*.ind,*.ist,*.lof,*.log,*.lot,*.maf,*.mtc,*.mtc0,*.nav,*.nlo,*.out,*.pdfsync,*.ps,*.snm,*.synctex.gz,*.toc,*.vrb,*.xdy,*.pdf,*.bcf,*.run.xml
 
 " Toggle NERDTree
@@ -278,6 +283,7 @@ let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 " vim-javascript
 let javascript_enable_domhtmlcss = 1
 let b:javascript_fold = 0
+let g:javascript_plugin_flow = 1
 
 " vim-jsx
 let g:jsx_ext_required = 0
