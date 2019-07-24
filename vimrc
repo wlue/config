@@ -56,6 +56,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'mxw/vim-jsx'
 Plugin 'toyamarinyon/vim-swift'
 Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'chase/vim-ansible-yaml'
 
 
 filetype plugin indent on
@@ -233,6 +234,7 @@ let g:airline_powerline_fonts=1
 
 " CtrlP
 let g:ctrlp_map = '<Leader>t'
+let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_clear_cache_on_exit = 1
 

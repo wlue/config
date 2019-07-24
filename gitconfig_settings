@@ -1,0 +1,33 @@
+[core]
+    excludesfile = ~/.gitignore_global
+    editor = /usr/bin/vim
+
+[color]
+    ui = true
+
+[diff]
+    tool = vimdiff
+
+[push]
+    default = simple
+
+[grep]
+    lineNumber = true
+    extendRegexp = true
+
+[alias]
+    g = grep --break --heading --line-number
+    branches = !legit branches
+    graft = !legit graft
+    harvest = !legit harvest
+    publish = !legit publish
+    unpublish = !legit unpublish
+    sprout = !legit sprout
+    sync = !legit sync
+    switch = !legit switch
+    resync = !legit resync
+
+[filter "lfs"]
+    clean = git-lfs clean %f
+    smudge = git-lfs smudge %f
+    required = true

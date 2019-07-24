@@ -2,29 +2,8 @@
     name = Wen-Hao Lue
     email = me@wenhaolue.com
 
-[core]
-    excludesfile = ~/.gitignore_global
-    editor = /usr/bin/vim
-
-[color]
-    ui = true
-
-[diff]
-    tool = vimdiff
-
 [github]
     user = wlue
 
-[push]
-    default = simple
-
-[grep]
-    lineNumber = true
-    extendRegexp = true
-
-[alias]
-    g = grep --break --heading --line-number
-[filter "lfs"]
-	clean = git-lfs clean %f
-	smudge = git-lfs smudge %f
-	required = true
+[include]
+    path = .wlue.config/gitconfig_settings
