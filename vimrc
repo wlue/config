@@ -7,14 +7,16 @@ syntax on
 filetype off
 
 " Vundle:
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-Bundle 'gmarik/vundle'
+
+Plugin 'VundleVim/Vundle.vim'
 
 " Plugins:
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'scrooloose/nerdtree'
+Plugin 'junegunn/fzf.'
 Plugin 'junegunn/fzf.vim'
 Plugin 'majutsushi/tagbar'
 Plugin 'sjl/gundo.vim'
@@ -48,7 +50,6 @@ Plugin 'derekwyatt/vim-scala'
 Plugin 'juvenn/mustache.vim'
 Plugin 'wlue/thrift.vim'
 Plugin 'rodjek/vim-puppet'
-Plugin 'evanmiller/nginx-vim-syntax'
 Plugin 'guns/vim-clojure-static'
 Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'hdima/python-syntax'
@@ -58,15 +59,22 @@ Plugin 'toyamarinyon/vim-swift'
 Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'chase/vim-ansible-yaml'
 
-
+call vundle#end()
 filetype plugin indent on
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim Settings:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-colorscheme wombat256mod
+if !exists('g:shadowvim')
+  colorscheme wombat256mod
+end
+
+if exists('g:shadowvim')
+  map <C-o> <Cmd>SVPress <LT>C-D-Left><CR>
+  map <C-i> <Cmd>SVPress <LT>C-D-Right><CR>
+end
+
 if has('gui_running')
   set gfn=Inconsolata-dz\ for\ Powerline:h12,Inconsolata:h14,Consolas:h11
 
@@ -76,6 +84,7 @@ if has('gui_running')
   set guioptions-=L
   set guioptions-=r
   set guioptions-=R
+  set guioptions+=k
 endif
 
 set mouse=a
