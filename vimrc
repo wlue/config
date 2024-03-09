@@ -6,61 +6,38 @@ set nocompatible
 syntax on
 filetype off
 
-" Vundle:
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+" vim-plug
+call plug#begin()
 
-
-Plugin 'VundleVim/Vundle.vim'
-
-" Plugins:
-Plugin 'Lokaltog/vim-powerline'
-Plugin 'scrooloose/nerdtree'
-Plugin 'junegunn/fzf.'
-Plugin 'junegunn/fzf.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'sjl/gundo.vim'
-Plugin 'matthias-guenther/hammer.vim'
-Plugin 'mileszs/ack.vim'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'vim-scripts/cocoa.vim'
-Plugin 'rphillips/vim-zoomwin'
-Plugin 'tpope/vim-fugitive'
-Plugin 'vim-scripts/matchit.zip'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'vim-scripts/ZoomWin'
-Plugin 'Rip-Rip/clang_complete'
-Plugin 'benmills/vimux'
+" Plugins
+Plug 'Lokaltog/vim-powerline'
+Plug 'scrooloose/nerdtree'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
+Plug 'davidhalter/jedi-vim'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/matchit.zip'
+Plug 'tomtom/tcomment_vim'
+Plug 'vim-scripts/ZoomWin'
+Plug 'Rip-Rip/clang_complete'
+Plug 'benmills/vimux'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Syntax plugins
-Plugin 'SyntaxComplete'
-Plugin 'scrooloose/syntastic'
-Plugin 'groenewege/vim-less'
-Plugin 'skammer/vim-css-color'
-Plugin 'hail2u/vim-css3-syntax'
-Plugin 'kchmck/vim-coffee-script'
-Plugin 'tpope/vim-liquid'
-Plugin 'Glench/Vim-Jinja2-Syntax'
-Plugin 'wlue/vim-dm-syntax'
-Plugin 'wlue/vim-objc-strings-syntax'
-Plugin 'wlue/go.vim'
-Plugin 'nono/vim-handlebars'
-Plugin 'othree/html5.vim'
-Plugin 'derekwyatt/vim-scala'
-Plugin 'juvenn/mustache.vim'
-Plugin 'wlue/thrift.vim'
-Plugin 'rodjek/vim-puppet'
-Plugin 'guns/vim-clojure-static'
-Plugin 'hynek/vim-python-pep8-indent'
-Plugin 'hdima/python-syntax'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'toyamarinyon/vim-swift'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'chase/vim-ansible-yaml'
+Plug 'wlue/vim-dm-syntax'
+Plug 'wlue/vim-objc-strings-syntax'
+Plug 'wlue/go.vim'
+Plug 'wlue/thrift.vim'
+Plug 'hynek/vim-python-pep8-indent'
+Plug 'hdima/python-syntax'
+Plug 'chase/vim-ansible-yaml'
+Plug 'pangloss/vim-javascript'
+Plug 'leafgarland/typescript-vim'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'jparise/vim-graphql'
 
-call vundle#end()
-filetype plugin indent on
+call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim Settings:
@@ -210,37 +187,24 @@ nmap <Leader>m :make<CR>
 " Rake
 nmap <Leader>M :!rake<CR>
 
-" Syntastic
-let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_checker_args='--ignore=E501,E225'
-
-let g:syntastic_javascript_checkers = ['eslint']
-
-" OmniCompletion
-set completeopt=longest,menuone,preview
-
-if has("autocmd") && exists("+omnifunc")
-  autocmd Filetype *
-        \ if &omnifunc == "" |
-        \   setlocal omnifunc=syntaxcomplete#Complete |
-        \ endif
-endif
+" Allow copy paste in neovim
+let g:neovide_input_use_logo = 1
+map <D-v> "+p<CR>
+map! <D-v> <C-R>+
+tmap <D-v> <C-R>+
+vmap <D-c> "+y<CR> 
 
 set rtp+=/usr/local/opt/fzf
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Mappings:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Cocoa.vim
-let g:objc_man_key="M"
+" Coq
+let g:coc_node_path = '~/.nvm/versions/node/v21.7.0/bin/node'
 
 " Powerline
 let g:Powerline_symbols = 'fancy'
-
-" Airline
-let g:airline_powerline_fonts=1
 
 " fzf
 nnoremap <silent> <leader>t :Files<CR>
@@ -266,28 +230,12 @@ inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
 inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
       \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
-" Toggle Tagbar
-nmap <Leader>T :TagbarToggle<CR>
-
-" Show functions, methods, classes, and global variables in JavaScript
-let tlist_javascript_settings = 'javascript;f:function;m:method;c:constructor;v:variable'
-
-" SuperTab
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
-
 " Gundo
 nmap <Leader>G :GundoToggle<CR>
 let g:gundo_right = 1
 
-" jedi
-let g:jedi#documentation_command = "<Leader>d"
-let g:jedi#usages_command = "<Leader>N"
-
 " zoomwin
 nnoremap <Leader>z :ZoomWin<CR>
-
-" Tagbar
-let g:tagbar_ctags_bin = '/usr/local/bin/ctags'
 
 " vim-javascript
 let javascript_enable_domhtmlcss = 1
