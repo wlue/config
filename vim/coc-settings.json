@@ -1,1 +1,6 @@
-{}
+{
+  "eslint.options": {
+    "autoFixOnSave": true,
+  },
+  "coc.preferences.formatOnSave": true
+}

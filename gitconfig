@@ -1,9 +1,13 @@
 [user]
     name = Wen-Hao Lue
     email = me@wenhaolue.com
+    signingkey = 55D5478578D5A92A
 
 [github]
     user = wlue
 
 [include]
     path = .wlue.config/gitconfig_settings
+
+[commit]
+    gpgsign = true

@@ -36,6 +36,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'leafgarland/typescript-vim'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'jparise/vim-graphql'
+Plug 'stephenway/postcss.vim'
 
 call plug#end()
 
@@ -202,6 +203,13 @@ set rtp+=/usr/local/opt/fzf
 
 " Coq
 let g:coc_node_path = '~/.nvm/versions/node/v21.7.0/bin/node'
+inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<TAB>"
+
+" GoTo code navigation
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " Powerline
 let g:Powerline_symbols = 'fancy'
