@@ -10,7 +10,6 @@ call plug#begin()
 
 " Plugins
 Plug 'Lokaltog/vim-powerline'
-Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
@@ -25,11 +24,16 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'github/copilot.vim'
 
 if has('nvim')
-  Plug 'nanozuki/tabby.nvim'
   Plug 'rebelot/kanagawa.nvim'
   Plug 'zbirenbaum/copilot.lua'
   Plug 'nvim-lua/plenary.nvim'
   Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
+  Plug 'lewis6991/gitsigns.nvim'
+  Plug 'nvim-tree/nvim-web-devicons'
+  Plug 'romgrk/barbar.nvim'
+  Plug 'nvim-tree/nvim-tree.lua'
+else
+  Plug 'scrooloose/nerdtree'
 end
 
 " Syntax plugins
@@ -64,28 +68,6 @@ if !exists('g:shadowvim')
   end
 end
 
-if exists('g:neovide')
-  " Support native Mac OS key bindings in Neovide
-  let neovide_cursor_animation_length = 0
-  let neovide_scroll_animation_length = 0
-  let g:neovide_input_use_logo = 1
-  map <D-v> "+p<CR>
-  map! <D-v> <C-R>+
-  tmap <D-v> <C-R>+
-  vmap <D-c> "+y<CR>
-
-  nnoremap <D-}> :tabnext<CR>
-  nnoremap <D-{> :tabprevious<CR>
-  nnoremap <D-t> :tabnew<CR>
-  nnoremap <D-s> :w<CR>
-  nnoremap <D-w> :bd<CR>
-end
-
-if exists('g:shadowvim')
-  map <C-o> <Cmd>SVPress <LT>C-D-Left><CR>
-  map <C-i> <Cmd>SVPress <LT>C-D-Right><CR>
-end
-
 if has('gui_running')
   set gfn=Inconsolata-dz\ for\ Powerline:h12,Inconsolata:h14,Consolas:h11
 
@@ -96,7 +78,7 @@ if has('gui_running')
   set guioptions-=r
   set guioptions-=R
   set guioptions+=k
-endif
+end
 
 set mouse=a
 set number
@@ -127,7 +109,7 @@ set clipboard=unnamed
 if exists('+colorcolumn')
   set colorcolumn=+1
   highlight ColorColumn ctermbg=235 guibg=#222222
-endif
+end
 
 " Highlight VCS conflict markers.
 match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$'
@@ -221,13 +203,6 @@ nmap <Leader>m :make<CR>
 " Rake
 nmap <Leader>M :!rake<CR>
 
-" Allow copy paste in neovim
-let g:neovide_input_use_logo = 1
-map <D-v> "+p<CR>
-map! <D-v> <C-R>+
-tmap <D-v> <C-R>+
-vmap <D-c> "+y<CR> 
-
 set rtp+=/usr/local/opt/fzf
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -243,6 +218,10 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" DIsable netrw
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
 
 " Powerline
 let g:Powerline_symbols = 'fancy'
@@ -260,23 +239,23 @@ nnoremap <silent> <leader>b :Buffers<CR>
 " nnoremap <Leader>b :CtrlPBuffer<CR>
 set wildignore+=*.o,.git,*.jpg,*.png,*.swp,*.d,*.gif,*.pyc,node_modules,*.class,*.crf,*.hg,*.orig,.meteor,*.acn,*.acr,*.alg,*.aux,*.bbl,*.blg,*.dvi,*.fdb_latexmk,*.glg,*.glo,*.gls,*.idx,*.ilg,*.ind,*.ist,*.lof,*.log,*.lot,*.maf,*.mtc,*.mtc0,*.nav,*.nlo,*.out,*.pdfsync,*.ps,*.snm,*.synctex.gz,*.toc,*.vrb,*.xdy,*.pdf,*.bcf,*.run.xml
 
-" Toggle NERDTree
-let NERDTreeIgnore=['\.o$', '\.d$', '\~$', '\.class$', '\.pyc', '.DS_Store', 'node_modules/']
-nmap <Leader>n :NERDTreeToggle<CR>
-au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
-      \ exe "normal g'\"" | endif
-inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
-      \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+if has('nvim')
+  " nvim-tree
+  nmap <Leader>n :NvimTreeToggle<CR>
+  " Xcode style focus
+  nnoremap <D-J> :NvimTreeFindFile<CR>
+else
+  " NERDTree
+  let NERDTreeIgnore=['\.o$', '\.d$', '\~$', '\.class$', '\.pyc', '.DS_Store', 'node_modules/']
+  nmap <Leader>n :NERDTreeToggle<CR>
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |
+        \ exe "normal g'\"" | endif
+  inoremap <expr> <C-n> pumvisible() ? '<C-n>' :
+        \ '<C-n><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
 
-inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
-      \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
-
-" Gundo
-nmap <Leader>G :GundoToggle<CR>
-let g:gundo_right = 1
-
-" zoomwin
-nnoremap <Leader>z :ZoomWin<CR>
+  inoremap <expr> <M-,> pumvisible() ? '<C-n>' :
+        \ '<C-x><C-o><C-n><C-p><C-r>=pumvisible() ? "\<lt>Down>" : ""<CR>'
+end
 
 " vim-javascript
 let javascript_enable_domhtmlcss = 1
@@ -285,6 +264,32 @@ let g:javascript_plugin_flow = 1
 
 " vim-jsx
 let g:jsx_ext_required = 0
+
+if exists('g:neovide')
+  " Support native Mac OS key bindings in Neovide
+  let neovide_cursor_animation_length = 0
+  let neovide_scroll_animation_length = 0
+  let g:neovide_input_use_logo = 1
+  map <D-v> "+p<CR>
+  map! <D-v> <C-R>+
+  tmap <D-v> <C-R>+
+  vmap <D-c> "+y<CR>
+
+  nnoremap <D-}> :BufferNext<CR>
+  nnoremap <D-{> :BufferPrevious<CR>
+  nnoremap <D-t> :tabnew<CR>
+
+  " nnoremap <D-}> :tabnext<CR>
+  " nnoremap <D-{> :tabprevious<CR>
+  " nnoremap <D-t> :tabnew<CR>
+  nnoremap <D-s> :w<CR>
+  nnoremap <D-w> :bd<CR>
+end
+
+if exists('g:shadowvim')
+  map <C-o> <Cmd>SVPress <LT>C-D-Left><CR>
+  map <C-i> <Cmd>SVPress <LT>C-D-Right><CR>
+end
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Functions:
@@ -295,3 +300,26 @@ function! CurrFileNoExt()
   return substitute(@%, '\.[^\.]*$','','')
 endfunction
 
+if has('nvim')
+lua <<EOF
+local function my_on_attach(bufnr)
+    local api = require "nvim-tree.api"
+    local function opts(desc)
+        return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+    end
+
+    api.config.mappings.default_on_attach(bufnr)
+
+    vim.keymap.del('n', '<C-v>', { buffer = bufnr })
+    vim.keymap.del('n', '<Tab>', { buffer = bufnr })
+
+    vim.keymap.set('n', 's',   api.node.open.vertical, opts('Open: Vertical Split'))
+end
+
+require("nvim-tree").setup {
+    ---
+    on_attach = my_on_attach,
+    ---
+}
+EOF
+end
