@@ -51,6 +51,10 @@ if [[ $1 == 'local' ]]; then
     symlink "$(pwd)/xvimrc"     ~/.xvimrc
 fi
 
+# nvim
+symlink_dir "$(pwd)/vim"        ~/.config/nvim
+symlink_dir "$(pwd)/share_nvim" ~/.local/share/nvim
+
 # git
 symlink "$(pwd)/gitignore_global"       ~/.gitignore_global
 if [[ $1 == 'local' ]]; then

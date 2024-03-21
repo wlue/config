@@ -1,6 +1,5 @@
 {
-  "eslint.options": {
-    "autoFixOnSave": true,
-  },
+  "eslint.autoFixOnSave": true,
+  "eslint.packageManager": "yarn",
   "coc.preferences.formatOnSave": true
 }

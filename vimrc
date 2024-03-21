@@ -1,7 +1,6 @@
 " vimrc configuration file
 " Author: Wen-Hao Lue <me@wenhaolue.com>
 
-" Use Vundle for plugin management.
 set nocompatible
 syntax on
 filetype off
@@ -23,6 +22,15 @@ Plug 'vim-scripts/ZoomWin'
 Plug 'Rip-Rip/clang_complete'
 Plug 'benmills/vimux'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'github/copilot.vim'
+
+if has('nvim')
+  Plug 'nanozuki/tabby.nvim'
+  Plug 'rebelot/kanagawa.nvim'
+  Plug 'zbirenbaum/copilot.lua'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'CopilotC-Nvim/CopilotChat.nvim', { 'branch': 'canary' }
+end
 
 " Syntax plugins
 Plug 'wlue/vim-dm-syntax'
@@ -40,12 +48,37 @@ Plug 'stephenway/postcss.vim'
 
 call plug#end()
 
+if has('nvim')
+  lua require("CopilotChat").setup { debug = true }
+end
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim Settings:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 if !exists('g:shadowvim')
-  colorscheme wombat256mod
+  if has('nvim')
+    colorscheme kanagawa
+  else
+    colorscheme wombat256mod
+  end
+end
+
+if exists('g:neovide')
+  " Support native Mac OS key bindings in Neovide
+  let neovide_cursor_animation_length = 0
+  let neovide_scroll_animation_length = 0
+  let g:neovide_input_use_logo = 1
+  map <D-v> "+p<CR>
+  map! <D-v> <C-R>+
+  tmap <D-v> <C-R>+
+  vmap <D-c> "+y<CR>
+
+  nnoremap <D-}> :tabnext<CR>
+  nnoremap <D-{> :tabprevious<CR>
+  nnoremap <D-t> :tabnew<CR>
+  nnoremap <D-s> :w<CR>
+  nnoremap <D-w> :bd<CR>
 end
 
 if exists('g:shadowvim')
