@@ -1,5 +1,8 @@
 {
   "eslint.autoFixOnSave": true,
   "eslint.packageManager": "yarn",
-  "coc.preferences.formatOnSave": true
+  "coc.preferences.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }

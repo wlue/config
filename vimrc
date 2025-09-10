@@ -10,18 +10,21 @@ call plug#begin()
 
 " Plugins
 Plug 'Lokaltog/vim-powerline'
-Plug 'junegunn/fzf'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'mileszs/ack.vim'
 Plug 'davidhalter/jedi-vim'
 Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
 Plug 'vim-scripts/matchit.zip'
 Plug 'tomtom/tcomment_vim'
 Plug 'vim-scripts/ZoomWin'
 Plug 'Rip-Rip/clang_complete'
 Plug 'benmills/vimux'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'github/copilot.vim'
+" Plug 'github/copilot.vim'
+Plug 'psf/black', { 'branch': 'stable' }
+Plug 'prisma/vim-prisma'
 
 if has('nvim')
   Plug 'rebelot/kanagawa.nvim'
@@ -32,6 +35,8 @@ if has('nvim')
   Plug 'nvim-tree/nvim-web-devicons'
   Plug 'romgrk/barbar.nvim'
   Plug 'nvim-tree/nvim-tree.lua'
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'greggh/claude-code.nvim'
 else
   Plug 'scrooloose/nerdtree'
 end
@@ -52,10 +57,6 @@ Plug 'stephenway/postcss.vim'
 
 call plug#end()
 
-if has('nvim')
-  lua require("CopilotChat").setup { debug = true }
-end
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Vim Settings:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -69,7 +70,6 @@ if !exists('g:shadowvim')
 end
 
 if has('gui_running')
-  set gfn=Inconsolata-dz\ for\ Powerline:h12,Inconsolata:h14,Consolas:h11
 
   " Get rid of the toolbar/scrollbars.
   set guioptions-=T
@@ -77,7 +77,7 @@ if has('gui_running')
   set guioptions-=L
   set guioptions-=r
   set guioptions-=R
-  set guioptions+=k
+  " set guioptions+=k
 end
 
 set mouse=a
@@ -147,8 +147,10 @@ set autoread
 set hlsearch
 set incsearch
 
-" Remove highlighting when pressing ESC.
-nnoremap <silent> <ESC> :noh<cr><ESC>
+" Disable netrw
+let g:loaded_netrw = 1
+let g:loaded_netrwPlugin = 1
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Mappings:
@@ -203,14 +205,22 @@ nmap <Leader>m :make<CR>
 " Rake
 nmap <Leader>M :!rake<CR>
 
-set rtp+=/usr/local/opt/fzf
+" Remove highlighting when pressing ESC.
+nnoremap <silent> <ESC> :noh<cr><ESC>
+
+" python provider
+let g:python3_host_prog = expand('.pyenv/versions/3.11.13/bin/python')
+let g:jedi#force_py_version = 3
+let g:jedi#usages_command = ""
+let g:jedi#documentation_command = ""
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Mappings:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Coq
-let g:coc_node_path = '~/.nvm/versions/node/v21.7.0/bin/node'
+" coc.nvim
+" let g:coc_node_path = '~/.nvm/versions/node/v21.7.0/bin/node'
 inoremap <silent><expr> <TAB> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<TAB>"
 
 " GoTo code navigation
@@ -219,14 +229,11 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" DIsable netrw
-let g:loaded_netrw = 1
-let g:loaded_netrwPlugin = 1
-
 " Powerline
 let g:Powerline_symbols = 'fancy'
 
 " fzf
+set rtp+=/usr/local/opt/fzf
 nnoremap <silent> <leader>t :Files<CR>
 nnoremap <silent> <leader>b :Buffers<CR>
 
@@ -265,6 +272,10 @@ let g:javascript_plugin_flow = 1
 " vim-jsx
 let g:jsx_ext_required = 0
 
+" github copilot
+imap <silent><script><expr> <C-J> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
+
 if exists('g:neovide')
   " Support native Mac OS key bindings in Neovide
   let neovide_cursor_animation_length = 0
@@ -284,6 +295,8 @@ if exists('g:neovide')
   " nnoremap <D-t> :tabnew<CR>
   nnoremap <D-s> :w<CR>
   nnoremap <D-w> :bd<CR>
+else
+  set gfn=Inconsolata-dz\ for\ Powerline:h12,Inconsolata:h14,Consolas:h11
 end
 
 if exists('g:shadowvim')
@@ -316,6 +329,8 @@ local function my_on_attach(bufnr)
     vim.keymap.set('n', 's',   api.node.open.vertical, opts('Open: Vertical Split'))
 end
 
+require('claude-code').setup()
+require("CopilotChat").setup { debug = true }
 require("nvim-tree").setup {
     ---
     on_attach = my_on_attach,
